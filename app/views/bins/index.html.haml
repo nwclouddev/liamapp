@@ -1,0 +1,23 @@
+%h1 Bin Setup
+
+%table
+  %thead
+    %tr
+      %th Code
+      %th Description
+      %th Organization
+      %th
+      %th
+
+  %tbody
+    - @bins.each do |bin|
+      %tr
+        %td= bin.code
+        %td= bin.description
+        %td= bin.organization.code
+        %td= link_to 'Edit', edit_bin_path(bin)
+        %td= link_to 'Destroy', bin, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Bin', new_bin_path

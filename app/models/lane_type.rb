@@ -1,0 +1,2 @@
+class LaneType < ApplicationRecord
+end

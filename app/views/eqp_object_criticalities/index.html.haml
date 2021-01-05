@@ -1,0 +1,24 @@
+.page-header
+  %p
+  = link_to new_eqp_object_criticality_path, class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    New Equipment Criticality
+  %h1Eqp_object_criticalities
+
+.table-responsive
+  %table.table.table-striped.table-hover
+    %thead
+      %tr
+        %th{"data-card-title" => ""} Sequence
+        %th Description
+        %th{:style => "text-align:center"} Out of Service
+    %tbody
+      - @eqp_object_criticalities.each do |eqp_object_criticality|
+        %tr
+          %td= link_to eqp_object_criticality.seq, edit_eqp_object_criticality_path(eqp_object_criticality)
+          %td= eqp_object_criticality.description
+          %td{:style => "text-align:center"}
+            - if eqp_object_criticality.not_used
+              %i.far.fa-check-square
+            - else
+              %i.far.fa-square

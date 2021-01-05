@@ -1,0 +1,4 @@
+$('.modal').each(function(index,element) {
+  $(element).modal('hide');
+});
+$('#<%= @store_part.id %>').replaceWith('<%= j render @store_part %>');

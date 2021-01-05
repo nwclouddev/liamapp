@@ -1,0 +1,4 @@
+$('.modal').each(function(index,element) {
+  $(element).modal('hide');
+});
+$('#<%= @pm_schedule_eqp_object.id %>').replaceWith('<%= j render @pm_schedule_eqp_object %>');

@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  pm_schedule: one
+  eqp_object: one
+  due_date: 2019-11-20
+  est_hours: 9.99
+  eqp_object_org_id: 1
+
+two:
+  pm_schedule: two
+  eqp_object: two
+  due_date: 2019-11-20
+  est_hours: 9.99
+  eqp_object_org_id: 1

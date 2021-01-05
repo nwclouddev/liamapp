@@ -1,0 +1,33 @@
+%p#notice= notice
+
+%p
+  %b Code:
+  = @eqp_profile.code
+%p
+  %b Desc:
+  = @eqp_profile.desc
+%p
+  %b Manufact:
+  = @eqp_profile.manufact
+%p
+  %b Manufact model:
+  = @eqp_profile.manufact_model
+%p
+  %b Not used:
+  = @eqp_profile.not_used
+%p
+  %b Entity class:
+  = @eqp_profile.entity_class
+%p
+  %b Entity category:
+  = @eqp_profile.entity_category
+%p
+  %b Eqp object status:
+  = @eqp_profile.eqp_object_status
+%p
+  %b Eqp object criticality:
+  = @eqp_profile.eqp_object_criticality
+
+= link_to 'Edit', edit_eqp_profile_path(@eqp_profile)
+\|
+= link_to 'Back', eqp_profiles_path

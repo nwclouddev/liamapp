@@ -1,0 +1,82 @@
+<!-- Sidebar-->
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
+  <!-- Sidebar - Brand-->
+  <%= link_to root_path, class: 'sidebar-brand d-flex align-items-center justify-content-center' do %>
+    <div class="sidebar-brand-icon rotate-n-15">
+      <i class="fas fa-tools"></i>
+    </div>
+    <div class="sidebar-brand-text mx-3">
+      LIAM
+    </div>
+  <% end %>
+  <!-- Divider-->
+  <hr class="sidebar-divider my-0"/>
+  <!-- Nav Item - Dashboard-->
+  <li class="nav-item">
+    <%= link_to dashboard_path, class: 'nav-link' do %>
+      <i class="fas fa-fw fa-tachometer-alt"></i>
+      <span>Dashboard</span>
+    <% end %>
+  </li>
+  <li class="nav-item">
+    <%= link_to events_path, class: 'nav-link' do %>
+      <i class="fas fa-toolbox"></i>
+      <span>Work Orders</span>
+    <% end %>
+  </li>
+  <li class="nav-item">
+    <%= link_to ioq_index_path, class:'nav-link' do %>
+      <i class="fas fa-check-double"></i>
+      <span>IOQ</span>
+    <% end %>
+  </li>
+  <li class="nav-item">
+    <%= link_to eqp_objects_path, class:'nav-link' do %>
+      <i class="fas fa-cogs"></i>
+      <span>Equipment</span>
+    <% end %>
+  </li>
+  <li class="nav-item">
+    <%= link_to pm_schedules_path, class: 'nav-link' do %>
+      <i class="fas fa-search"></i>
+      <span>PM Schedules</span>
+    <% end %>
+  </li>
+  <li class="nav-item">
+    <%= link_to forecast_path, class: 'nav-link' do %>
+      <i class="far fa-calendar-check"></i>
+      <span>PM Forecast Tool</span>
+    <% end %>
+  </li>
+  <li class="nav-item">
+    <%= link_to parts_path, class: 'nav-link' do %>
+      <i class="fas fa-puzzle-piece"></i>
+      <span>Parts</span>
+    <% end %>
+  </li>
+  <li class="nav-item">
+    <%= link_to edit_store_path(current_user.store), class: 'nav-link' do %>
+      <i class="fas fa-store"></i>
+      <span>My Parts Store</span>
+    <% end %>
+  </li>
+    <li class="nav-item">
+    <%= link_to organizations_path, class: 'nav-link' do %>
+      <i class="fas fa-sitemap"></i>
+      <span>Organizations</span>
+    <% end %>
+  </li>
+  </li>
+    <li class="nav-item">
+    <%= link_to users_path, class: 'nav-link' do %>
+      <i class="fas fa-users"></i>
+      <span>Users</span>
+    <% end %>
+  </li>
+  <hr class="sidebar-divider d-none d-md-block"/>
+  <!-- Sidebar Toggler (Sidebar)-->
+  <div class="text-center d-none d-md-inline">
+    <button class="rounded-circle border-0" id="sidebarToggle"></button>
+  </div>
+</ul>
+<!-- End of Sidebar-->

@@ -1,0 +1,22 @@
+
+%h1 Lane Type Setup
+= link_to new_lane_type_path, class: 'btn btn-primary' do
+  %span.glyphicon.glyphicon-plus
+  New
+.table-responsive
+%table.table.table-striped.table-hover
+  %thead
+    %tr
+      %th Lane Type
+      %th Description
+      %th{:style => "text-align:center"} Out of Service
+  %tbody
+    - @lane_types.each do |lane_type|
+      %tr
+        %td= link_to lane_type.code, edit_lane_type_path(lane_type)
+        %td= lane_type.description
+        %td{:style => "text-align:center"}
+          - if lane_type.not_used
+            %i.far.fa-check-square
+          - else
+            %i.far.fa-square

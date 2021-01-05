@@ -1,0 +1,7 @@
+%span.badge  
+- @pm_schedule_eqp_objects.each do |pm_schedule_eqp_object|
+  %tr
+    %td= pm_schedule_eqp_object.id
+    %td= pm_schedule_eqp_object.eqp_object.code
+    %td= pm_schedule_eqp_object.eqp_object.organization.code
+    %td= pm_schedule_eqp_object.due_date

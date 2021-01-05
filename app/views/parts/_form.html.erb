@@ -1,0 +1,91 @@
+<%= render 'shared/errors', obj: @part %>
+<%= form_with(model: @part, local: true) do |form| %>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= form.label :code,"Part" %>
+        <% if @part.persisted? %>
+          <%= form.text_field :id, class: 'form-control', disabled: true %>
+        <% else %>
+          <%= form.text_field :id, class: 'form-control' %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="form-group">
+        <%= form.label :description %>
+        <%= form.text_field :description, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= form.label :class,"Part" %>
+        <%= form.select(:part_class_id, ( PartClass.all.collect {|t| [ t.code, t.id ]}), { include_blank: true }, {class: "form-control"}) %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group form-check">
+        <%= form.check_box :not_used, class: 'form-check-input' %>
+        <%= form.label :not_used, "Out of Service", class: 'form-check-label' %>
+      </div>
+    </div>
+  </div>
+  <%= link_to "Stock", "/parts/#{@part.id}/stock" %>
+  <div class='card'>
+    <div class='card-header'>
+      <h4>Suppliers</h4>
+    </div>
+    <div class='card-body'>
+      <div data-controller="nested-form">
+        <template data-target='nested-form.template'>
+          <%= form.fields_for :supplier_parts, SupplierPart.new, child_index: 'TEMPLATE_RECORD' do |supplier_part| %>
+            <%= render 'supplier_parts', form: supplier_part %>
+          <% end %>
+        </template>
+        
+        <%= form.fields_for :supplier_parts do |supplier_part| %>
+          <%= render 'supplier_parts', form: supplier_part %>
+        <% end %>
+
+        <div data-target="nested-form.add_item">
+          <%= link_to "Add", "#", data: { action: "nested-form#add_association" } %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class='card'>
+    <div class='card-header'>
+      <h4>Manufacturers</h4>
+    </div>
+    <div class='card-body'>
+      <div data-controller="nested-form">
+        <template data-target='nested-form.template'>
+          <%= form.fields_for :manufact_parts, ManufactPart.new, child_index: 'TEMPLATE_RECORD' do |manufact_part| %>
+            <%= render 'manufact_parts', form: manufact_part %>
+          <% end %>
+        </template>
+
+        <%= form.fields_for :manufact_parts do |manufact_part| %>
+          <%= render 'manufact_parts', form: manufact_part %>
+        <% end %>
+
+        <div data-target="nested-form.add_item">
+          <%= link_to "Add", "#", data: { action: "nested-form#add_association" } %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= link_to :back, class: 'btn btn-danger' do %>
+    <span class="far fa-arrow-alt-circle-left"></span>
+    Back
+  <% end %>
+  <%= button_tag(type: :submit, class: 'btn btn-success') do %>
+    <i class="far fa-save"></i>
+    Save
+  <% end %>
+
+<% end %>

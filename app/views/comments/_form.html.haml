@@ -1,0 +1,7 @@
+= form_for [commentable, Comment.new] do |form|
+  .form-group
+    .col-auto
+      = form.text_area :body, rows: 5, class: 'form-control', placeholder: 'Your comment'
+  .form-group
+    .col-md-offset-2.col-md-10
+      = form.submit "Add Comment", class: "btn btn-primary btn-sm pull-right"

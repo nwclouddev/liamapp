@@ -1,0 +1,36 @@
+.page-header
+  = link_to eqp_objects_path, class: 'btn btn-danger' do
+    %span.glyphicon.glyphicon-list-alt
+    Back
+  = link_to edit_eqp_object_path(@eqp_object), class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-pencil
+    Edit
+  %h1 Show eqp_object
+
+%dl.dl-horizontal
+  %dt Code:
+  %dd= @eqp_object.code
+  %dt Desc:
+  %dd= @eqp_object.desc
+  %dt Alias:
+  %dd= @eqp_object.alias
+  %dt Commission date:
+  %dd= @eqp_object.commission_date
+  %dt Manufact:
+  %dd= @eqp_object.manufact
+  %dt Manufact model:
+  %dd= @eqp_object.manufact_model
+  %dt Revision:
+  %dd= @eqp_object.revision
+  %dt Profile to apply:
+  %dd= @eqp_object.profile_to_apply
+  %dt Profile applied:
+  %dd= @eqp_object.profile_applied
+  %dt Not used:
+  %dd= @eqp_object.not_used
+  %dt Entity class:
+  %dd= @eqp_object.entity_class
+  %dt Entity category:
+  %dd= @eqp_object.entity_category
+  %dt Eqp object status:
+  %dd= @eqp_object.eqp_object_status

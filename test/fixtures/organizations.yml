@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  code: MyString
+  description: MyString
+  not_used: false
+  go_live_date: 2019-11-19
+  pm_start_date: 2019-11-19
+  pm_generation_lead_time: 1
+
+two:
+  code: MyString
+  description: MyString
+  not_used: false
+  go_live_date: 2019-11-19
+  pm_start_date: 2019-11-19
+  pm_generation_lead_time: 1

@@ -1,0 +1,78 @@
+<div class="d-flex justify-content-center">
+  <div class="col-xl-4 col-lg-5">
+    <%#= render 'shared/errors', obj: eqp_object %>
+    <%= form_with(model: @eqp_object, local: true) do |f| %>
+      <% unless @eqp_object.persisted? %>
+        <div class="form-group">
+          <%= f.label :organization, "Site" %>
+          <%= f.select(:organization_id, (Organization.all.map { |p| [ p.code, p.id ] }), { selected: current_user.organization_id}, 
+              class: 'form-control select2', readonly: true ) %>
+        </div>
+      <% end %>
+      <div class="field">
+        <%= f.label :category %>
+        <%= f.select :eqp_object_category_id, 
+            options_for_select(EqpObjectCategory.select_values, @eqp_object&.eqp_object_category&.id), 
+            { include_blank: true },
+            { class: 'remote-select form-control', data: { target: '#eqp_object_eqp_profile_id' } } %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :profile %>
+        <%= f.select :eqp_profile_id,
+            options_for_select(EqpProfile.select_values(@eqp_object&.eqp_object_category), @eqp_object&.eqp_profile&.id),
+            {},
+            {class: 'form-control'} %>
+      </div>
+      <div class="form-group">
+        <%= f.label :description %>
+        <% if @eqp_object.persisted? %>
+          <%= f.text_field :description, class: 'form-control', readonly: true %>
+        <% else %>
+          <%= f.text_field :description, class: 'form-control' %>
+        <% end %>
+      </div>
+      <div class="form-group">
+        <%= f.label :alias, 'Unit No.' %>
+        <%= f.text_field :alias, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :code, 'Asset Tag' %>
+        <% if @eqp_object.persisted? %>
+          <%= f.text_field :code, class: 'form-control', disabled: true %>
+        <% else %>
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <%= link_to '#', class: 'input-group-text' do %>
+                <i class="fas fa-qrcode"></i>
+              <% end %>
+            </div>
+            <%= f.text_field :code, class: 'form-control' %>
+          </div>
+        <% end %>
+      </div>
+      <div class="form-group">
+        <%= f.label :func_des_id, "Functional Area" %>
+        <%= f.select(:functional_area_id, (FunctionalArea.all.collect { |p| [p.code, p.id] }), {include_blank: true}, class: 'form-control select2') %>
+      </div>
+      <div class="form-group">
+        <%= f.label :lane_type_id, 'Lane Description' %>
+        <%= f.select(:lane_type_id, (LaneType.all.collect { |p| [p.code, p.id] }), { include_blank: true }, class: 'form-control select2') %>
+      </div>
+      <div class="form-group">
+        <%= f.label :num_des, '##' %>
+        <%= f.text_field :num_des, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :status %>
+        <%= f.select(:eqp_object_status_id, (EqpObjectStatus.all.collect { |p| [p.description, p.id] }), { include_blank: true }, class: 'form-control select2', disabled: true) %>
+      </div>
+
+      <%= link_to 'Back', eqp_objects_path, class: 'btn btn-danger' %>
+      <%= button_tag(type: :submit, class: 'btn btn-primary') do %>
+        <i class="far fa-save"></i>
+        Save
+      <% end %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Code:
+  = @store.code
+%p
+  %b Description:
+  = @store.description
+%p
+  %b Organization:
+  = @store.organization
+%p
+  %b Not used:
+  = @store.not_used
+
+= link_to 'Edit', edit_store_path(@store)
+\|
+= link_to 'Back', stores_path

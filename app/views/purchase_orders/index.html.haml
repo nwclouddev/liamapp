@@ -1,0 +1,30 @@
+%h1 Purchase Orders
+.table-responsive
+  %table.table.table-striped.table-condensed.table-hover
+    %thead
+      %tr
+        %th Organization
+        %th Purchase order
+        %th Description
+        %th Due date
+        %th User
+        %th Purchase order status
+        %th Supplier
+        %th Store
+
+    %tbody
+      - @purchase_orders.each do |purchase_order|
+        %tr
+          %td= purchase_order.organization.code
+          %td= link_to purchase_order.id, edit_purchase_order_path(purchase_order)
+          %td= purchase_order.description
+          %td= purchase_order.due_date
+          %td= purchase_order.user.name
+          %td= purchase_order.purchase_order_status_id
+          %td= purchase_order.supplier_id
+          %td= purchase_order.store.code
+
+%br
+
+= link_to 'New Purchase order', new_purchase_order_path
+     

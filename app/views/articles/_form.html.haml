@@ -1,0 +1,27 @@
+= form_for(@article, :html => { class: "form-horizontal", role: "form" }) do |f|
+  -if @article.errors.any?
+    .alert.alert-danger.alert-dismissable{role: "alert"}
+      %button.close{type: "button", data: {dismiss: "alert"} }
+        %span{aria: {hidden: "true"} } &times;
+        %span.sr-only Close
+      %h4= "#{pluralize(@article.errors.count, "error")} prohibited this entity_class from being saved:"
+      %ul
+        - @article.errors.full_messages.each do |msg|
+          %li= msg
+  .form-group
+    = f.label :title
+    = f.text_field :title, class: "form-control", placeholder: "Title of announcement", autofocus: true
+  .form-group
+    = f.label :content
+    = f.rich_text_area :content
+  .form-group
+    .row
+      .col-sm-8.col-sm-offset-2
+        = f.collection_check_boxes :category_ids, Category.all, :id, :name do |cb|
+          - cb.label(class: "checkbox-inline input_checkbox") {cb.check_box(class: "checkbox") + cb.text }
+  = link_to articles_path, class: "btn btn-danger" do
+    %span.far.fa-arrow-alt-circle-left
+    Back
+  = button_tag(type: :submit, class: 'btn btn-success') do
+    %i.far.fa-save
+    Save

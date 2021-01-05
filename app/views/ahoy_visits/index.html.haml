@@ -1,0 +1,34 @@
+%h1 Ahoy Visit Log
+.table-responsive
+  %table.table.table-striped.table-condensed.table-hover
+    %thead
+      %tr
+        %th Actions
+        %th Time
+        %th IP Address
+        %th City
+        %th State/Region
+        %th Country
+        %th Lat./Lon.
+        %th Browser
+        %th OS
+        %th Device Type
+        %th Landing Page
+        %th Referrer
+        %th User Agent
+    %tbody
+      - @ahoy_visits.each do |ahoy_visit|
+        %tr
+          %td= link_to 'Destroy', ahoy_visit, method: :delete, data: { confirm: 'Are you sure?' }
+          %td= ahoy_visit.started_at.in_time_zone("Pacific Time (US & Canada)")
+          %td= ahoy_visit.ip
+          %td= ahoy_visit.city
+          %td= ahoy_visit.region
+          %td= ahoy_visit.country
+          %td= "#{ahoy_visit.latitude} / #{ahoy_visit.longitude}"
+          %td= ahoy_visit.browser
+          %td= ahoy_visit.os
+          %td= ahoy_visit.device_type
+          %td= ahoy_visit.landing_page
+          %td= ahoy_visit.referrer
+          %td= ahoy_visit.user_agent

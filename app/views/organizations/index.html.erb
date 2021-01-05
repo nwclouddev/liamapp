@@ -1,0 +1,49 @@
+<h1>Organizations</h1>
+<%= link_to 'New',new_organization_path, class: 'btn btn-primary' %>
+<div class="table-responsive">
+  <table class="table table-hover table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Organization</th>
+        <th scope="col">Description</th>
+        <th style="text-align:center">Out of Service</th>
+        <th scope="col">Go-Live Date</th>
+        <th scope="col">PM Start Date</th>
+        <th scope="col">PM Generation Lead Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @organizations.each do |organization| %>
+        <tr>
+          <td>
+            <%= link_to organization.code, edit_organization_path(organization) %>
+          </td>
+          <td>
+            <%= organization.description %>
+          </td>
+          <td style="text-align:center">
+            <% if organization.not_used %>
+              <i class="far fa-check-square"></i>
+            <% else %>
+              <i class="far fa-square"></i>
+            <% end %>
+          </td>
+          <td>
+            <%= organization.go_live_date %>
+          </td>
+          <td>
+            <%= organization.pm_start_date %>
+          </td>
+          <td>
+            <%= organization.pm_generation_lead_time %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class='pagination justify-content-center'>
+    <%= paginate @organizations, theme: 'twitter-bootstrap-4', align: 'center' %>
+  </div>
+</div>
+
+

@@ -1,0 +1,2 @@
+class PartUom < ApplicationRecord
+end

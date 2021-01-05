@@ -1,0 +1,21 @@
+= form_for [laborable, LaborHour.new] do |f|
+  .row
+    .col-md-2
+      .form-group
+        = f.label :user_id, "Employee"
+        = f.select(:used_id, ( User.all.collect {|t| [ t.name, t.id ]}), { selected: current_user.id }, {class: "form-control"})
+    .col-md-1
+      .form-group
+        = f.label :hours, "Hours"
+        = f.text_field :hours, class: 'form-control'
+    .col-md-2
+      .form-group
+        = f.label :date_worked, "Date Worked"
+        = f.text_field :date_worked, class: 'form-control'
+    .col-md-7
+      .form-group
+        = f.label :description, "Notes"
+        = f.text_field :description, class: 'form-control'
+  .form-group
+    .col-md-offset-2.col-md-10
+      = f.submit "Add Labor", class: "btn btn-primary btn-sm pull-right"

@@ -1,0 +1,42 @@
+.page-header
+  %h1 Work Order Status Setup
+  %p
+  = link_to new_event_status_path, class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    New Work Order Status
+  %h1Eqp_object_statuses
+.table-responsive
+  %table.table.table-striped.table-hover#myTable
+    %thead
+      %tr
+        %th{"data-card-title" => ""} Sequence
+        %th Description
+        %th{:style => "text-align:center"} Open Status
+        %th{:style => "text-align:center"} Available on Create
+        %th{:style => "text-align:center"} Available on Update
+        %th{:style => "text-align:center"} Out of Service
+    %tbody
+      - @event_statuses.each do |event_status|
+        %tr
+          %td= link_to event_status.seq, edit_event_status_path(event_status)
+          %td= event_status.description
+          %td{:style => "text-align:center"}
+            - if event_status.active_event
+              %i.far.fa-check-square
+            - else
+              %i.far.fa-square
+          %td{:style => "text-align:center"}
+            - if event_status.active_on_create
+              %i.far.fa-check-square
+            - else
+              %i.far.fa-square
+          %td{:style => "text-align:center"}
+            - if event_status.active_on_update
+              %i.far.fa-check-square
+            - else
+              %i.far.fa-square
+          %td{:style => "text-align:center"}
+            - if event_status.not_used
+              %i.far.fa-check-square
+            - else
+              %i.far.fa-square

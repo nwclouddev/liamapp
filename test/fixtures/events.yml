@@ -1,0 +1,53 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  organization: one
+  eqp_object: one
+  description: MyString
+  event_type: one
+  event_status: one
+  event_priority: one
+  user: one
+  sched_start_date: 2019-11-19
+  sched_end_date: 2019-11-19
+  labor_hours: 9.99
+  estimated_hours: 9.99
+  pm_schedule_id: 1
+  due_date: 2019-11-19
+  date_completed: 2019-11-19
+  reopened: false
+  completed_by_id: 1
+  event_eqp_group_id: 1
+  event_problem_id: 1
+  event_failure_id: 1
+  event_component_id: 1
+  event_owner: 1
+  assigned_to: 1
+  downtime_hours: 9.99
+  scheduling_block: MyString
+
+two:
+  organization: two
+  eqp_object: two
+  description: MyString
+  event_type: two
+  event_status: two
+  event_priority: two
+  user: two
+  sched_start_date: 2019-11-19
+  sched_end_date: 2019-11-19
+  labor_hours: 9.99
+  estimated_hours: 9.99
+  pm_schedule_id: 1
+  due_date: 2019-11-19
+  date_completed: 2019-11-19
+  reopened: false
+  completed_by_id: 1
+  event_eqp_group_id: 1
+  event_problem_id: 1
+  event_failure_id: 1
+  event_component_id: 1
+  event_owner: 1
+  assigned_to: 1
+  downtime_hours: 9.99
+  scheduling_block: MyString

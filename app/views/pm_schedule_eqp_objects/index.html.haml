@@ -1,0 +1,20 @@
+#modal-window.modal.fade{ "aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+.page-header
+  %h1 PM Schedule Objects
+.table-responsive
+  %table.table.table-striped.table-hover#myTable
+    %thead
+      %tr
+        %th{"data-card-title" => ""} PM Schedule
+        %th Equipment
+        %th Object Org
+        %th Frequency
+        %th Due Date
+        %th Estimated Hours
+    %tbody
+      = render @pm_schedule_eqp_objects
+.container.pagination.justify-content-center
+  = paginate @pm_schedule_eqp_objects, theme: 'twitter-bootstrap-4', align: 'center'
+

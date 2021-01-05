@@ -1,0 +1,25 @@
+.modal-header
+  %h5#myModalLabel.modal-title New Scan
+  %button.close{"data-dismiss" => "modal", :type => "button", "aria-label" => "Close"}
+    %span{"aria-hidden" => "true"} ×
+.modal-body
+  .d-flex.justify-content-center
+    %video#video{:height => "400", :width => "500"}
+  %label Result:
+  :javascript
+    const codeReader = new ZXing.BrowserQRCodeReader();
+
+    codeReader
+      .decodeFromInputVideoDevice(undefined, 'video')
+      .then((result) => {
+        // process the result
+        console.log(result.text)
+
+        document.getElementById('result').textContent = result.text
+      })
+      .catch(err => console.error(err));
+  %pre
+    %code#result
+  = javascript_pack_tag("basic-qr-code-reader")
+.modal-footer
+  %button.btn.btn-primary Save

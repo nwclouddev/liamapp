@@ -1,0 +1,18 @@
+.page-header
+  = link_to eqp_object_statuses_path, class: 'btn btn-default' do
+    %span.glyphicon.glyphicon-list-alt
+    Back
+  = link_to edit_eqp_object_status_path(@eqp_object_status), class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-pencil
+    Edit
+  %h1 Show eqp_object_status
+
+%dl.dl-horizontal
+  %dt Seq:
+  %dd= @eqp_object_status.seq
+  %dt Desc:
+  %dd= @eqp_object_status.desc
+  %dt Avail on create:
+  %dd= @eqp_object_status.avail_on_create
+  %dt Not used:
+  %dd= @eqp_object_status.not_used

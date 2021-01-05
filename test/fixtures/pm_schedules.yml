@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  code: MyString
+  description: MyString
+  frequency: 1
+  period_uom: MyString
+  not_used: false
+  est_hours: 1.5
+  persons_required: 1
+  trade: MyString
+
+two:
+  code: MyString
+  description: MyString
+  frequency: 1
+  period_uom: MyString
+  not_used: false
+  est_hours: 1.5
+  persons_required: 1
+  trade: MyString

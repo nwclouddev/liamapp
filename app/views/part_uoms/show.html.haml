@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Code:
+  = @part_uom.code
+%p
+  %b Description:
+  = @part_uom.description
+%p
+  %b Not used:
+  = @part_uom.not_used
+
+= link_to 'Edit', edit_part_uom_path(@part_uom)
+\|
+= link_to 'Back', part_uoms_path

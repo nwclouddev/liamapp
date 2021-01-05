@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Code:
+  = @evt_component_code.code
+%p
+  %b Desc:
+  = @evt_component_code.desc
+%p
+  %b Not used:
+  = @evt_component_code.not_used
+
+= link_to 'Edit', edit_evt_component_code_path(@evt_component_code)
+\|
+= link_to 'Back', evt_component_codes_path

@@ -1,0 +1,12 @@
+= render 'shared/errors', obj: @eqp_object_criticality
+= form_for @eqp_object_criticality, html: { class: "form-horizontal", role: "form" } do |f|
+  .form-group
+    = f.label :sequence
+    = f.number_field :seq, class: 'form-control', required: true
+  .form-group
+    = f.label :description
+    = f.text_field :description, class: 'form-control', required: true
+  .form-group.form-check
+    = f.check_box :not_used, class: 'form-check-input'
+    = f.label :not_used, "Out of Service", class: 'form-check-label'
+  = render 'shared/form_navigation'

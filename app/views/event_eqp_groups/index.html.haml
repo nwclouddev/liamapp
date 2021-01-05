@@ -1,0 +1,24 @@
+.page-header
+  %h1 Equipment Group Setup
+  %p
+  = link_to new_event_eqp_group_path, class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    New Equipment Group
+
+.table-responsive
+  %table.table.table-striped.table-hover#myTable
+    %thead
+      %tr
+        %th{"data-card-title" => ""} Equipment Group
+        %th Description
+        %th{:style => "text-align:center"} Out of Service
+    %tbody
+      - @event_eqp_groups.each do |event_eqp_group|
+        %tr
+          %td= link_to event_eqp_group.code, edit_event_eqp_group_path(event_eqp_group)
+          %td= event_eqp_group.description
+          %td{:style => "text-align:center"}
+            - if event_eqp_group.not_used
+              %i.far.fa-check-square
+            - else
+              %i.far.fa-square

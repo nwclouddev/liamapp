@@ -1,0 +1,24 @@
+.page-header
+  %h1 Problem Group Setup
+  %p
+  = link_to new_event_problem_path, class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    New Problem Group
+
+.table-responsive
+  %table.table.table-striped.table-hover#myTable
+    %thead
+      %tr
+        %th{"data-card-title" => ""} Problem Group
+        %th Description
+        %th{:style => "text-align:center"} Out of Service
+    %tbody
+      - @event_problems.each do |event_problem|
+        %tr
+          %td= link_to event_problem.code, edit_event_problem_path(event_problem)
+          %td= event_problem.description
+          %td{:style => "text-align:center"}
+            - if event_problem.not_used
+              %i.far.fa-check-square
+            - else
+              %i.far.fa-square

@@ -1,0 +1,31 @@
+.page-header
+  %h1 Work Order Type Setup
+  %p
+  = link_to new_event_type_path, class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    New Work Order type
+  %h1 WO Type
+
+.table-responsive
+  %table.table.table-striped.table-hover#myTable
+    %thead
+      %tr
+        %th{"data-card-title" => ""} Sequence
+        %th Description
+        %th{:style => "text-align:center"} User Creatable
+        %th{:style => "text-align:center"} Out of Service
+    %tbody
+      - @event_types.each do |event_type|
+        %tr
+          %td= link_to event_type.seq, edit_event_type_path(event_type)
+          %td= event_type.description
+          %td{:style => "text-align:center"}
+            - if event_type.user_createable
+              %i.far.fa-check-square
+            - else
+              %i.far.fa-square
+          %td{:style => "text-align:center"}
+            - if event_type.not_used
+              %i.far.fa-check-square
+            - else
+              %i.far.fa-square

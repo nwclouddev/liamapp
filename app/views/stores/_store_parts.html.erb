@@ -1,0 +1,30 @@
+<div class='nested-fields'>
+  <div class='form-group'>
+    <%= form.hidden_field :_destroy %>
+    <div class='row'>
+      <div class='col-md-2'>
+        <%= form.label :part %>
+        <% if :part_id? %>
+          <%= form.text_field :part_id, class: 'form-control', disabled: true %>
+        <% else %>
+          <%= form.text_field :part_id, class: 'form-control' %>
+        <% end %>
+      </div>
+      <div class='col-md-6'>
+        <%= form.label :stock_criticality %>
+        <%= form.text_field :stock_criticality_id, class: 'form-control' %>
+      </div>      
+      <div class='col-md-2'>
+        <%= form.label :min_qty, "Minimum Quantity" %>
+        <%= form.text_field :min_qty, class: 'form-control' %>
+      </div>
+      <div class='col-md-2'>
+        <%= form.label :max_qty, "Maximum Quantity" %>
+        <%= form.text_field :max_qty, class: 'form-control' %>
+      </div>
+    </div>
+    <small>
+      <%= link_to "Remove", "#", data: { confirm: 'Are you sure you want to delete the Manufacturer Part Number?', action: "click->nested-form#remove_association" } %>
+    </small>
+  </div>
+</div>

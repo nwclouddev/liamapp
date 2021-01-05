@@ -1,0 +1,18 @@
+<div class='nested-fields'>
+  <div class='form-group'>
+    <%= form.hidden_field :_destroy %>
+    <div class='row'>
+      <div class='col-md-4'>
+        <%= form.label :manufacturer_id %>
+        <%= form.select(:manufacturer_id, (Manufacturer.all.collect { |p| [p.code, p.id] }), { include_blank: true }, class: 'form-control') %>
+      </div>
+      <div class='col-md-8'>
+        <%= form.label :part_number %>
+        <%= form.text_field :manufact_part_num, placeholder: 'Manufacturer Part Number', class: 'form-control' %>
+      </div>
+    </div>
+    <small>
+      <%= link_to "Remove", "#", data: { confirm: 'Are you sure you want to delete the Manufacturer Part Number?', action: "click->nested-form#remove_association" } %>
+    </small>
+  </div>
+</div>

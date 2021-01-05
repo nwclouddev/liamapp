@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  g: MyString
+  model: MyString
+  EventType: MyString
+  seq: 1
+  description: MyString
+  user_createable: false
+  not_used: false
+
+two:
+  g: MyString
+  model: MyString
+  EventType: MyString
+  seq: 1
+  description: MyString
+  user_createable: false
+  not_used: false

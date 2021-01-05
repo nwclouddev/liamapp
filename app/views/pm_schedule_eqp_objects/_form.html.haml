@@ -1,0 +1,15 @@
+= form_for @pm_schedule_eqp_object do |f|
+  .modal-header
+    %h5#myModalLabel.modal-title PM Record
+    %button.close{"data-dismiss" => "modal", :type => "button", "aria-label" => "Close"}
+      %span{"aria-hidden" => "true"} ×
+  .modal-body
+    .form-group.datepicker
+      = f.label :due_date
+      .input-group.mb-2
+        .input-group-prepend
+          .input-group-text
+            %i.far.fa-calendar-alt
+        = f.text_field :due_date, { "data-toggle" => "datepicker", class: 'form-control'}
+  .modal-footer
+    %button.btn.btn-primary Save

@@ -1,0 +1,71 @@
+= render 'shared/errors', obj: @pm_schedule
+= form_for @pm_schedule, html: { class: "form-horizontal", role: "form" } do |f|
+  .row
+    .col-md-4
+      .form-group
+        = f.label :code,"PM Schedule"
+        - if @pm_schedule.persisted?
+          = f.text_field :code, class: 'form-control', disabled: true
+        - else
+          = f.text_field :code, class: 'form-control'
+    .col-md-8
+      .form-group
+        = f.label :description
+        = f.text_field :description, class: 'form-control'
+  .row
+    .col-md-4
+      .form-group
+        = f.label :profile
+        - if @pm_schedule.eqp_profile_id?
+          = f.select(:eqp_profile_id, (EqpProfile.all.map { |p| [ p.expanded_desc, p.id ] }), {include_blank: true}, class: 'form-control', disabled: true)
+        - else
+          = f.select(:eqp_profile_id, (EqpProfile.all.map { |p| [ p.expanded_desc, p.id ] }), {include_blank: true}, class: 'form-control')
+  %hr
+  .row
+    .col-md-6
+      .form-group
+        = f.label :frequency
+        = f.number_field :frequency, class: 'form-control'
+    .col-md-6      
+      .form-group
+        = f.label :period_uom, 'Period UOM'
+        = f.select(:period_uom_id, (PeriodUom.all.map { |p| [ p.description, p.id ] }), {}, class: 'form-control')
+  .form-group
+    = f.label :trade
+    = f.text_field :trade, class: 'form-control'
+  .row
+    .col-md-6
+      .form-group
+        = f.label :estimated_hours
+        = f.text_field :est_hours, class: 'form-control'
+    .col-md-6
+      .form-group
+        = f.label :persons_required
+        = f.text_field :persons_required, class: 'form-control'
+  .form-group.form-check
+    = f.check_box :not_used, class: 'form-check-input'
+    = f.label :not_used, "Out of Service", class: 'form-check-label'
+  = link_to pm_schedules_path, class: 'btn btn-danger' do
+    %span.far.fa-arrow-alt-circle-left
+    Back
+  = button_tag(type: :submit, class: 'btn btn-success') do
+    %i.far.fa-save
+    Save
+%table.table.table-striped.table-hover
+  %thead
+    %tr
+      %th Record ID
+      %th Equipment
+      %th Equipment Org
+      %th Due Date
+  %tbody
+    - if @pm_schedule.id? && @pm_schedule_eqp_objects.any?
+      %span.badge  
+      - @pm_schedule_eqp_objects.each do |pm_schedule_eqp_object|
+        %tr
+          %td= pm_schedule_eqp_object.id
+          %td= pm_schedule_eqp_object.eqp_object.code
+          %td= pm_schedule_eqp_object.eqp_object.organization.code
+          %td= pm_schedule_eqp_object.due_date
+      .container.pagination.justify-content-center
+        = paginate @pm_schedule_eqp_objects, theme: 'twitter-bootstrap-4', align: 'center'

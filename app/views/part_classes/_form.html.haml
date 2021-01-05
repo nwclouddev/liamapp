@@ -1,0 +1,16 @@
+= form_for @part_class do |f|
+  - if @part_class.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@part_class.errors.count, "error")} prohibited this part_class from being saved:"
+      %ul
+        - @part_class.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :code
+    = f.text_field :code
+  .field
+    = f.label :not_used
+    = f.check_box :not_used
+  .actions
+    = f.submit 'Save'

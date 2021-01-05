@@ -1,0 +1,27 @@
+%p#notice= notice
+
+%p
+  %b Description:
+  = @purchase_order.description
+%p
+  %b Organization:
+  = @purchase_order.organization
+%p
+  %b Due date:
+  = @purchase_order.due_date
+%p
+  %b User:
+  = @purchase_order.user
+%p
+  %b Purchase order status:
+  = @purchase_order.purchase_order_status_id
+%p
+  %b Supplier:
+  = @purchase_order.supplier_id
+%p
+  %b Store:
+  = @purchase_order.store
+
+= link_to 'Edit', edit_purchase_order_path(@purchase_order)
+\|
+= link_to 'Back', purchase_orders_path

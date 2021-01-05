@@ -1,0 +1,46 @@
+<h2>Stock Record</h2>
+<%= simple_form_for(@store_part) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  <div class="form-inputs">
+    <div class='row'>
+      <div class='col-md-4'>
+        <% if @store_part.id.present? %>
+          <%= f.association :part, collection: Part.where(id: @store_part.part_id), prompt: "Select Part", label_method: :expanded_desc, disabled: true %>
+        <% else %>
+          <%= f.association :part, collection: Part.all.order(:id), prompt: "Select Part", label_method: :expanded_desc %>
+        <% end %>
+      </div>
+      <div class='col-md-4'>
+        <% if @store_part.id.present? %>
+          <%= f.association :store, collection: Store.where(id: @store_part.store_id), prompt: "Select Store", label_method: :code, disabled: true %>
+        <% else %>
+          <%= f.association :store, collection: Store.all.collect, prompt: "Select Store", label_method: :code %>
+        <% end %>
+      </div>
+      <div class='col-md-2'>
+        <%= f.association :bin, label: 'Default Bin',collection: Bin.all.collect, prompt: "Select Bin", label_method: :code %>
+      </div>
+      <div class='col-md-1'>
+        <%= f.label :min_qty, "Min Qty" %>
+        <%= f.text_field :min_qty, class: 'form-control', label_method: "Min"  %>
+      </div>
+      <div class='col-md-1'>
+        <%= f.label :max_qty, "Max Qty" %>
+        <%= f.text_field :max_qty, class: 'form-control', label_method: "Min"  %>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='col-md-4'>
+        <%= f.association :stock_criticality, collection: StockCriticality.all.order(:seq), prompt: "Select Criticality", label_method: :code %>
+      </div>
+      <div class='col-md-4'>
+        <%= f.association :supplier, label: 'Default Supplier', collection: Supplier.all.order(:description), prompt: "Select Default Supplier", label_method: :code %>
+      </div>
+    </div>
+  </div>
+  <div class="form-actions">
+    <%= link_to 'Back', :back, class: 'btn btn-sm btn-danger' %>
+    <%= f.button :submit, "Save", class: 'btn btn-sm btn-primary' %>
+  </div>
+<% end %>

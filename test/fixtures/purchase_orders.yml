@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  description: MyString
+  organization: one
+  due_date: 2020-04-29
+  user: one
+  purchase_order_status_id: 1
+  supplier_id: 1
+  store: one
+
+two:
+  description: MyString
+  organization: two
+  due_date: 2020-04-29
+  user: two
+  purchase_order_status_id: 1
+  supplier_id: 1
+  store: two

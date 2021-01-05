@@ -1,0 +1,23 @@
+.page-header
+  %h1 Component Group Setup
+  %p
+  = link_to new_event_component_path, class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    New Component Group
+.table-responsive
+  %table.table.table-striped.table-hover
+    %thead
+      %tr
+        %th{"data-card-title" => ""} Component Group
+        %th Description
+        %th{:style => "text-align:center"} Out of Service
+    %tbody
+      - @event_components.each do |event_component|
+        %tr
+          %td= link_to event_component.code, edit_event_component_path(event_component)
+          %td= event_component.description
+          %td{:style => "text-align:center"}
+            - if event_component.not_used
+              %i.far.fa-check-square
+            - else
+              %i.far.fa-square

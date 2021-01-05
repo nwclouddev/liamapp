@@ -1,0 +1,62 @@
+= render 'shared/errors', obj: @eqp_profile
+= form_for @eqp_profile, html: { class: "form-horizontal", role: "form" } do |f|
+  .form-group
+    =f.label :code, "Profile"
+    - if @eqp_profile.persisted?
+      = f.text_field :code, class: 'form-control', disabled: true
+    - else
+      = f.text_field :code, class: 'form-control'
+  .form-group
+    =f.label :description, "Description"
+    =f.text_field :description, class: 'form-control'
+  .form-group
+    =f.label :manufact, "Manufacturer"
+    =f.text_field :manufact, class: 'form-control'
+  .form-group
+    =f.label :manufact_model, "Model"
+    =f.text_field :manufact_model, class: 'form-control'
+  .form-group.form-check
+    = f.check_box :not_used, class: 'form-check-input'
+    = f.label :not_used, "Out of Service", class: 'form-check-label'
+  .form-group
+    =f.label :class, "Class"
+    =f.select(:eqp_object_class_id, (EqpObjectClass.all.collect { |p| [p.code, p.id] }), {include_blank: true}, class: 'form-control')
+  .form-group
+    =f.label :Category, "Category"
+    =f.select(:eqp_object_category_id, (EqpObjectCategory.all.collect { |p| [p.code, p.id] }), {include_blank: true}, class: 'form-control')
+  .form-group
+    =f.label :eqp_object_status_id, "Status"
+    =f.select(:eqp_object_status_id, (EqpObjectStatus.all.collect { |p| [p.description, p.id] }), {include_blank: true}, class: 'form-control')
+  .form-group
+    =f.label :criticality
+    =f.select(:eqp_object_criticality_id, (EqpObjectCriticality.all.map { |p| [ p.description, p.id ] }), {nclude_blank: true}, class: 'form-control')
+  = render 'shared/form_navigation'
+%hr
+.table-responsive
+  %table.table.table-striped.table-hover
+    %thead
+      %tr
+        %th PM Schedule
+        %th Desctiption
+        %th Frequency
+        %th Period UOM
+        %th Out of Service
+        %th Trade
+        %th Estimated Hours
+        %th Persons Required
+    %tbody
+      - if @eqp_profile.persisted?
+        - @eqp_profile_pm_schedules.each do |eqp_profile_pm_schedule|
+          %tr
+            %td= link_to eqp_profile_pm_schedule.code, edit_pm_schedule_path(eqp_profile_pm_schedule)
+            %td= eqp_profile_pm_schedule.description
+            %td= eqp_profile_pm_schedule.frequency
+            %td= eqp_profile_pm_schedule.period_uom
+            %td{:style => "text-align:center"}
+              - if eqp_profile_pm_schedule.not_used
+                %i.far.fa-check-square
+              - else
+                %i.far.fa-square
+            %td= eqp_profile_pm_schedule.trade
+            %td= eqp_profile_pm_schedule.est_hours
+            %td= eqp_profile_pm_schedule.persons_required 

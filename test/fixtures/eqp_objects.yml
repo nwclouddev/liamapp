@@ -1,0 +1,33 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  code: MyString
+  description: MyString
+  alias: MyString
+  commission_date: 2019-11-19
+  manufact: MyString
+  manufact_model: MyString
+  revision: MyString
+  eqp_profile: one
+  profile_applied: MyString
+  not_used: false
+  eqp_object_class: one
+  eqp_object_category: one
+  eqp_object_status: one
+  eqp_object_criticality: one
+
+two:
+  code: MyString
+  description: MyString
+  alias: MyString
+  commission_date: 2019-11-19
+  manufact: MyString
+  manufact_model: MyString
+  revision: MyString
+  eqp_profile: two
+  profile_applied: MyString
+  not_used: false
+  eqp_object_class: two
+  eqp_object_category: two
+  eqp_object_status: two
+  eqp_object_criticality: two

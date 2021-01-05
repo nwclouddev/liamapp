@@ -1,0 +1,115 @@
+<h3 class="mb-2 text-gray-800">Equipment</h3>
+<%= link_to new_eqp_object_path, class: 'btn btn-primary' do %>
+  <span class="far fa-file"></span>
+  New
+<% end %>
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th>Equipment</th>
+            <th>Description</th>
+            <th>Alias</th>
+            <th>Commission date</th>
+            <th>Manufacturer</th>
+            <th>Model</th>
+            <th>Profile to Apply</th>
+            <th>Profile Applied</th>
+            <th style="text-align:center">Out of Service</th>
+            <th>Class</th>
+            <th>Category</th>
+            <th>Status</th>
+            <th>Criticality</th>
+            <th>Organization</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <th>Equipment</th>
+            <th>Description</th>
+            <th>Alias</th>
+            <th>Commission date</th>
+            <th>Manufacturer</th>
+            <th>Model</th>
+            <th>Profile to Apply</th>
+            <th>Profile Applied</th>
+            <th style="text-align:center">Out of Service</th>
+            <th>Class</th>
+            <th>Category</th>
+            <th>Status</th>
+            <th>Criticality</th>
+            <th>Organization</th>
+          </tr>
+        </tfoot>
+        <tbody>
+          <% @eqp_objects.each do |eqp_object| %>
+            <tr>
+              <td>
+                <%= link_to eqp_object.code, edit_eqp_object_path(eqp_object) %>
+              </td>
+              <td>
+                <%= eqp_object.description %>
+              </td>
+              <td>
+                <%= eqp_object.alias %>
+              </td>
+              <td>
+                <%= eqp_object.commission_date %>
+              </td>
+              <td>
+                <%= eqp_object.manufact %>
+              </td>
+              <td>
+                <%= eqp_object.manufact_model %>
+              </td>
+              <td>
+                <% unless eqp_object.eqp_profile == nil %>
+                  <%= eqp_object.eqp_profile.code %>
+                <% end %>
+              </td>
+              <td>
+                <%= eqp_object.profile_applied %>
+              </td>
+              <td style="text-align:center">
+                <% if eqp_object.not_used %>
+                  <i class="far fa-check-square"></i>
+                <% else %>
+                  <i class="far fa-square"></i>
+                <% end %>
+              </td>
+              <td>
+                <%= eqp_object.eqp_object_class.code %>
+              </td>
+              <td>
+                <%= eqp_object.eqp_object_category.code %>
+              </td>
+              <td>
+                <%= eqp_object.eqp_object_status.description %>
+              </td>
+              <td>
+                <%= eqp_object.eqp_object_criticality.description %>
+              </td>
+              <td>
+                <%= eqp_object.organization.code %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="container pagination justify-content-center"></div>
+  </div>
+  <%= paginate @eqp_objects, theme: 'twitter-bootstrap-4', align: 'center' %>
+</div>
+
+<%= form_tag import_eqp_objects_path, multipart: true do %>
+  <div class='form-group'>
+    <%= file_field_tag :file, class: 'form-control-file' %>
+  </div>
+  <%= submit_tag "Upload", class: 'btn btn-primary' %>
+<% end %>

@@ -1,0 +1,18 @@
+= render 'shared/errors', obj: @eqp_object_category
+= form_for @eqp_object_category, html: { class: "form-horizontal", role: "form" } do |f|
+  .form-group
+    = f.label :code
+    - if @eqp_object_category.persisted?
+      = f.text_field :code, class: 'form-control', disabled: true
+    - else
+      = f.text_field :code, class: 'form-control'
+  .form-group
+    = f.label :description
+    = f.text_field :description, class: 'form-control'
+  .form-group
+    = f.label :class
+    = f.select :eqp_object_class_id, EqpObjectClass.all.collect { |p| [ p.code, p.id ] }, include_blank: true, class: 'form-control'
+  .form-group.form-check
+    = f.label :not_used, "Out of Service"
+    = f.check_box :not_used, class: 'form-check-input'
+  = render 'shared/form_navigation'

@@ -1,0 +1,88 @@
+= render 'form'
+-# .page-header
+-#   %h1 Edit Equipment
+-# #modal-window.modal.fade{ "aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+-#   .modal-dialog{:role => "document"}
+-#     .modal-content
+-# = render 'shared/errors', obj: @eqp_object
+-# = form_for @eqp_object, html: { class: "form-horizontal", role: "form" } do |f|
+-#   .form-group
+-#     = f.label :code, "Equipment"
+-#     - if @eqp_object.persisted?
+-#       = f.text_field :code, class: 'form-control', disabled: true
+-#     - else
+-#       = f.text_field :code, class: 'form-control'
+-#   .form-group
+-#     = f.label :description
+-#     = f.text_field :description, class: 'form-control', disabled: true
+-#   .form-group
+-#     = f.label :alias
+-#     = f.text_field :alias, class: 'form-control'
+-#   .form-group
+-#     = f.label :func_des_id, "Functional Area"
+-#     = f.select(:functional_area_id, (FunctionalArea.all.collect { |p| [p.code, p.id] }), {include_blank: true}, class: 'form-control')
+-#   .form-group
+-#     = f.label :lane_type_id, 'Lane Description'
+-#     = f.select(:lane_type_id, (LaneType.all.collect { |p| [p.code, p.id] }), { include_blank: true }, class: 'form-control')
+-#   .form-group
+-#     = f.label :num_des, '##'
+-#     = f.text_field :num_des, class: 'form-control'
+-#   .form-group.datepicker
+-#     = f.label :commission_date
+-#     .input-group.mb-2
+-#       .input-group-prepend
+-#         .input-group-text
+-#           %i.far.fa-calendar-alt
+-#       = f.text_field :commission_date, class: 'form-control'
+-#   .form-group
+-#     = f.label :manufacturer_id
+-#     = f.text_field :manufact, class: 'form-control', disabled: true
+-#     -# = f.select(:manufacturer_id, (Manufacturer.all.collect { |p| [p.code, p.id] }), { include_blank: true }, class: 'form-control')
+-#   .form-group
+-#     = f.label :model
+-#     = f.text_field :manufact_model, class: 'form-control', disabled: true
+-#     -# = f.select(:manufact_model_id, (EqpProfile.all.collect { |p| [p.code, p.id] }), { include_blank: true }, class: 'form-control')
+-#   .form-group
+-#     = f.label :profile_to_apply
+-#     = f.select(:eqp_profile_id, (EqpProfile.all.collect { |p| [p.expanded_desc, p.id] }), {}, class: 'form-control')
+-#   .form-group
+-#     = f.label :profile_applied
+-#     = f.text_field :profile_applied, class: 'form-control', disabled: true
+-#   .form-group.form-check
+-#     = f.check_box :not_used, class: 'form-check-input'
+-#     = f.label :not_used, "Out of Service", class: 'form-check-label'
+-#   .form-group
+-#     = f.label :class
+-#     = f.select(:eqp_object_class_id, (EqpObjectClass.all.map { |p| [ p.description, p.id ] }), { include_blank: true}, class: 'form-control', blank: true, disabled: true)
+-#   .form-group
+-#     = f.label :category
+-#     = f.select(:eqp_object_category_id, (EqpObjectCategory.all.map { |p| [ p.description, p.id ] }), { include_blank: true}, class: 'form-control', disabled: true)
+-#   .form-group
+-#     = f.label :status
+-#     = f.select(:eqp_object_status_id, (EqpObjectStatus.all.map { |p| [ p.description, p.id ] }), {include_blank: true}, class: 'form-control')
+-#   .form-group
+-#     = f.label :criticality
+-#     = f.select(:eqp_object_criticality_id, (EqpObjectCriticality.all.map { |p| [ p.description, p.id ] }), {nclude_blank: true}, class: 'form-control')
+-#   .form-group
+-#     = f.label :organization
+-#     - if @eqp_object.persisted?
+-#       = f.select(:organization_id, (Organization.all.map { |p| [ p.code, p.id ] }), {}, class: 'form-control', disabled: true)
+-#     - else
+-#       = f.select(:organization_id, (Organization.all.map { |p| [ p.code, p.id ] }), { prompt: true, selected: current_user.organization_id }, class: 'form-control')
+-#   = render 'shared/form_navigation'
+-# %table.table.table-striped.table-hover
+-#   %thead
+-#     %tr
+-#       %th Record ID
+-#       %th PM Schedule
+-#       %th Description
+-#       %th Due Date
+-#   %tbody
+-#     - if @eqp_object.persisted? && @pm_schedule_eqp_objects.any?
+-#       %span.badge  
+-#       - @pm_schedule_eqp_objects.each do |pm_schedule_eqp_object|
+-#         %tr
+-#           %td= pm_schedule_eqp_object.id
+-#           %td= pm_schedule_eqp_object.pm_schedule.code
+-#           %td= pm_schedule_eqp_object.pm_schedule.description
+-#           %td= link_to pm_schedule_eqp_object.due_date, edit_pm_schedule_eqp_object_path(pm_schedule_eqp_object),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}

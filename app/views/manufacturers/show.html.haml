@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Code:
+  = @manufacturer.code
+%p
+  %b Not used:
+  = @manufacturer.not_used
+
+= link_to 'Edit', edit_manufacturer_path(@manufacturer)
+\|
+= link_to 'Back', manufacturers_path

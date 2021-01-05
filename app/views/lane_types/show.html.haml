@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Code:
+  = @lane_type.code
+%p
+  %b Not used:
+  = @lane_type.not_used
+
+= link_to 'Edit', edit_lane_type_path(@lane_type)
+\|
+= link_to 'Back', lane_types_path

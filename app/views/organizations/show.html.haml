@@ -1,0 +1,33 @@
+- model_class = Organization
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human.titleize
+
+%p
+  %strong= model_class.human_attribute_name(:code) + ':'
+  %br
+  = @organization.code
+%p
+  %strong= model_class.human_attribute_name(:description) + ':'
+  %br
+  = @organization.description
+%p
+  %strong= model_class.human_attribute_name(:not_used) + ':'
+  %br
+  = @organization.not_used
+%p
+  %strong= model_class.human_attribute_name(:go_live_date) + ':'
+  %br
+  = @organization.go_live_date
+%p
+  %strong= model_class.human_attribute_name(:pm_start_date) + ':'
+  %br
+  = @organization.pm_start_date
+%p
+  %strong= model_class.human_attribute_name(:pm_generation_lead_time) + ':'
+  %br
+  = @organization.pm_generation_lead_time
+
+
+= link_to t('.back', :default => t("helpers.links.back")), organizations_path, :class => 'btn btn-default'
+= link_to t('.edit', :default => t("helpers.links.edit")), edit_organization_path(@organization), :class => 'btn btn-default'
+= link_to t('.destroy', :default => t("helpers.links.destroy")), organization_path(@organization), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'

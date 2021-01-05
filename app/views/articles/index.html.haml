@@ -1,0 +1,8 @@
+.page-header
+  %h1 Announcements
+= link_to new_article_path, class: 'btn btn-primary' do
+  %span.far.fa-file
+  New
+= render 'article', obj: @articles
+.container.pagination.justify-content-center
+  = paginate @articles, theme: 'twitter-bootstrap-4', align: 'center'

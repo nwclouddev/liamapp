@@ -1,0 +1,22 @@
+
+%h1 Manufacturers
+= link_to new_manufacturer_path, class: 'btn btn-primary' do
+  %span.glyphicon.glyphicon-plus
+  New
+.table-responsive
+%table.table.table-striped.table-hover
+  %thead
+    %tr
+      %th Lane Type
+      %th Description
+      %th{:style => "text-align:center"} Out of Service
+  %tbody
+    - @manufacturers.each do |manufacturer|
+      %tr
+        %td= link_to manufacturer.code, edit_manufacturer_path(manufacturer)
+        %td= manufacturer.description
+        %td{:style => "text-align:center"}
+          - if manufacturer.not_used
+            %i.far.fa-check-square
+          - else
+            %i.far.fa-square

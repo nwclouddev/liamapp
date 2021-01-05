@@ -1,0 +1,89 @@
+class EqpObjectsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :set_eqp_object, only: [:show, :edit, :update, :destroy]
+
+  def new
+    @eqp_object = EqpObject.new
+    @eqp_object.eqp_object_status_id = EqpObjectStatus.first.id
+    @eqp_object_categories = EqpObjectCategory.active
+    @eqp_profiles = EqpProfile.where(obj_type: 'A').includes(:eqp_object_category)
+  end  
+ 
+  def index
+    if current_user.organization.code == "*"
+      @eqp_objects = EqpObject.all.page(params[:page]).includes(:eqp_object_class,
+                                                                :eqp_object_category, :eqp_object_criticality, :eqp_object_status, :organization).order(:code)       
+    else
+      @eqp_objects = EqpObject.where(organization_id: current_user.organization_id).page(params[:page]).includes(:eqp_object_class,
+                                                                                                                  :eqp_object_category, :eqp_object_criticality, :eqp_object_status, :organization).order(:code) 
+    end
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: UsersDatatable.new(view_context) }
+    end
+  end
+
+
+  def show
+  end
+
+
+
+  def edit
+    @eqp_object_categories = EqpObjectCategory.active
+    @pm_schedule_eqp_objects = PmScheduleEqpObject.where(eqp_object_id: @eqp_object.id).includes(:pm_schedule)
+  end
+
+  def create
+    @eqp_object_categories = EqpObjectCategory.active
+    @eqp_object = EqpObject.new(eqp_object_params)
+    @eqp_object.eqp_object_status_id = EqpObjectStatus.first.id
+    respond_to do |format|
+      if @eqp_object.save
+        format.html { redirect_to edit_eqp_object_path(@eqp_object), notice: 'Asset was successfully added.' }
+        format.json { render :show, status: :created, location: @eqp_object }
+      else
+        format.html { render :new }
+        format.json { render json: @eqp_object.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def update
+    respond_to do |format|
+      if @eqp_object.update(eqp_object_params)
+        format.html {
+          redirect_to edit_eqp_object_path(@eqp_object), notice: 'Asset was successfully updated.' }
+        format.json { render :show, status: :ok, location: @eqp_object }
+      else
+        format.html { render :edit }
+        format.json { render json: @eqp_object.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def destroy
+
+  end
+
+  def import
+    count = EqpObject.import params[:file]
+    redirect_to eqp_objects_path, notice: "Imported #{count} Equipment objects"
+  end
+
+  private
+  
+  def set_eqp_object
+    @eqp_object = EqpObject.find(params[:id])
+    @eqp_profiles = EqpProfile.all
+  end
+
+  def eqp_object_params
+    params.require(:eqp_object).permit(:code, :description, :alias, :commission_date,
+                                      :manufact, :manufact_model, :revision,
+                                      :profile_to_apply, :not_used, :eqp_object_class_id, :eqp_object_category_id,
+                                      :eqp_object_status_id, :eqp_object_criticality_id,
+                                      :organization_id, :eqp_profile_id, :functional_area_id, :lane_type_id, 
+                                      :num_des)
+  end
+end

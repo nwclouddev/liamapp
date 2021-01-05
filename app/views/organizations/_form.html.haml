@@ -1,0 +1,27 @@
+= render 'shared/errors', obj: @organization
+= form_for @organization, html: { class: "form form-horizontal organization" } do |f|
+  .form-group
+    = f.label :code,"Class", class: 'col-sm-2 col-form-label'
+    - if @organization.persisted?
+      = f.text_field :code, class: 'form-control', disabled: true
+    - else
+      = f.text_field :code, class: 'form-control'
+  .form-group
+    = f.label :description
+    = f.text_field :description, class: 'form-control'
+  .form-group.form-check
+    = f.check_box :not_used, class: 'form-check-input'
+    = f.label :not_used, "Out of Service", class: 'form-check-label'
+  .form-group
+    = f.label :go_live_date
+    = f.text_field :go_live_date, class: 'form-control', required: true
+  .form-group
+    = f.label :pm_start_date
+    = f.text_field :pm_start_date, class: 'form-control', required: true
+  .form-group
+    = f.label :pm_generation_lead_time
+    = f.text_field :pm_generation_lead_time, class: 'form-control', required: true
+  .form-group
+    .col-lg-offset-2.col-lg-10
+      = f.submit nil,class: 'btn btn-primary'
+      = link_to t('.cancel', :default => t("helpers.links.cancel")), organizations_path, :class => 'btn btn-danger'

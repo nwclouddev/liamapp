@@ -1,0 +1,12 @@
+-# frozen_string_literal: true
+= simple_form_for(@bin) do |f|
+  = f.error_notification
+  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+  .form-inputs
+    = f.input :code
+    = f.input :description
+    = f.association :organization, collection: Organization.all.order(:code), prompt: "Select and Organization", label_method: :code
+
+  .form-actions
+    = f.button :submit

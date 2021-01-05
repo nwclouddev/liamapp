@@ -1,0 +1,28 @@
+%h1 Equipment Categories
+= link_to new_eqp_object_category_path, class: 'btn btn-primary' do
+  %span.glyphicon.glyphicon-plus
+  New
+.table-responsive
+  %table.table.table-striped.table-hover
+    %thead
+      %tr
+        %th{"data-card-title" => ""} Code
+        %th Description
+        %th Class
+        %th{:style => "text-align:center"} Out of Service
+    %tbody
+      - @eqp_object_categories.each do |eqp_object_category|
+        %tr
+          %td= link_to eqp_object_category.code, edit_eqp_object_category_path(eqp_object_category)
+          %td= eqp_object_category.description
+          %td= eqp_object_category.eqp_object_class.code
+          %td{:style => "text-align:center"}
+            - if eqp_object_category.not_used
+              %i.far.fa-check-square
+            - else
+              %i.far.fa-square
+.container.pagination.justify-content-center
+  = paginate @eqp_object_categories, theme: 'twitter-bootstrap-4', align: 'center'
+= form_tag import_eqp_object_categories_path, multipart: true do
+  = file_field_tag :file
+  = submit_tag "Upload"

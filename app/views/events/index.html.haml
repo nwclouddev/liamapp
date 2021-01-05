@@ -1,0 +1,39 @@
+%h1 Work Orders
+Count: #{Event.all.count}
+%br
+= link_to new_event_path, class: 'btn btn-primary' do
+  %span.far.fa-file
+  New
+.table-responsive
+  %table.table.table-striped.table-condensed.table-hover
+    %thead
+      %tr
+        %th Work Order
+        %th Description
+        %th Equipment
+        %th Equipment Description
+        %th Type
+        %th Status
+        %th Date Created
+        %th Sched. Start Date
+        %th Priority
+        %th Organization
+    %tbody
+      - @events.each do |event|
+        %tr
+          %td= link_to event.id, edit_event_path(event)
+          %td= event.description
+          %td= event.eqp_object.code
+          %td= event.eqp_object.description
+          %td= event.event_type.description
+          %td= event.event_status.description
+          %td= event.created_at.to_date
+          %td= event.sched_start_date
+          %td= event.event_priority.description
+          %td= event.organization.code
+.container.pagination.justify-content-center
+  = paginate @events, theme: 'twitter-bootstrap-4', align: 'center'
+.col-md-10.wo-wrapper
+  #wo-lookup
+  #load-wo
+  #load-wo-error

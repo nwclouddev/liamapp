@@ -1,0 +1,6 @@
+$("#modal-window").find(".modal-content").html("<%= j (render 'edit') %>");
+$(".calendar").fullcalendar(
+  'renderEvent',
+  $.parseJSON("<%=j render(@pm_schedule_eqp_object, format: :json).html_safe %>"),
+  true
+);

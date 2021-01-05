@@ -1,0 +1,25 @@
+%h1 Listing part_uoms
+
+%table
+  %thead
+    %tr
+      %th Code
+      %th Description
+      %th Not used
+      %th
+      %th
+      %th
+
+  %tbody
+    - @part_uoms.each do |part_uom|
+      %tr
+        %td= part_uom.code
+        %td= part_uom.description
+        %td= part_uom.not_used
+        %td= link_to 'Show', part_uom
+        %td= link_to 'Edit', edit_part_uom_path(part_uom)
+        %td= link_to 'Destroy', part_uom, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Part uom', new_part_uom_path

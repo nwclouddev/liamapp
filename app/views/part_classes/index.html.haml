@@ -1,0 +1,23 @@
+%h1 Part Classes
+
+%table
+  %thead
+    %tr
+      %th Code
+      %th Not used
+      %th
+      %th
+      %th
+
+  %tbody
+    - @part_classes.each do |part_class|
+      %tr
+        %td= part_class.code
+        %td= part_class.not_used
+        %td= link_to 'Show', part_class
+        %td= link_to 'Edit', edit_part_class_path(part_class)
+        %td= link_to 'Destroy', part_class, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Part class', new_part_class_path

@@ -1,0 +1,183 @@
+= render 'shared/errors', obj: @event
+= form_for(@event, html: { class: "form-horizontal", role: "form" }) do |f|
+  = link_to events_path, class: 'btn btn-danger' do
+    %span.far.fa-arrow-alt-circle-left
+    Back
+  = button_tag(type: :submit, class: "btn btn-success") do
+    %i.far.fa-save
+    Save
+  .card
+    .card-header
+      %strong Work Order Record
+    .card-body
+      .row
+        .col-md-4
+          .form-group.row
+            = f.label "Work Order", class: 'col-sm-4 col col-form-label'
+            .col-sm-8
+              = f.text_field :id, class: "form-control", :disabled=>true
+          - if @event.id?
+            .form-group.row
+              = f.label :wo_status_id, 'Status', class: "col-sm-4 col-form-label"
+              .col-sm-8
+                - if @event.persisted?
+                  = f.select(:event_status_id, ( EventStatus.all.order(seq: :asc).map {|t| [t.description, t.id ]}), {}, {class: 'form-control'})
+                - else
+                  = f.select(:event_status_id, ( EventStatus.where(active_on_update: true).order(seq: :asc).map {|t| [t.description, t.id ]}), {}, {class: 'form-control'})
+          - else
+            .form-group.row
+              = f.label :wo_status_id, 'Status', class: "col-sm-4 col-form-label"
+              .col-sm-8
+                = f.select(:event_status_id, ( EventStatus.where(active_on_create: true).order(seq: :asc).map {|t| [t.description, t.id ]}), {}, {class: "form-control input-md"})
+          .form-group.row
+            = f.label :organization_id, 'Organization', class: "col-sm-4 col-form-label"
+            .col-sm-8
+              - if @event.persisted? && @event.event_type.user_createable == false
+                = f.select(:organization_id, ( Organization.all.collect {|t| [ t.code, t.id ]}), { include_blank: true }, {class: "form-control", disabled: true })
+              - else
+                = f.select(:organization_id, ( Organization.all.collect {|t| [ t.code, t.id ]}), { selected: params[current_user.organization_id] }, {class: "form-control"})
+          
+          .form-group.row
+            = f.label :event_type_id, 'Type', class: "col-sm-4 col-form-label"
+            .col-sm-8
+              - if @event.persisted?
+                - if @event.event_type.user_createable?
+                  = f.select(:event_type_id, ( EventType.where(user_createable: true).map {|t| [ t.description, t.id ]}), {}, {class: "form-control"})
+                - else
+                  = f.select(:event_type_id, (EventType.all.map {|t| [ t.description, t.id ]}), {}, class: 'form-control', disabled: true )
+              - else
+                = f.select(:event_type_id, ( EventType.where(user_createable: true).map {|t| [ t.description, t.id ]}), { include_blank: true }, {class: "form-control"})
+          .form-group.row
+            = f.label :event_priority_id, 'Priority', class: "col-sm-4 col-form-label"
+            .col-sm-8
+              - if @event.persisted?
+                = f.select(:event_priority_id, ( EventPriority.all.collect {|t| [t.description, t.id ]}), { include_blank: true }, {class: "form-control"})
+              - else
+                = f.select(:event_priority_id, ( EventPriority.all.collect {|t| [t.description, t.id ]}), { selected: 6}, {class: "form-control"})
+          .form-group.row
+            = f.label :booked_hrs, 'Booked Hrs', class: "col-sm-4 col-form-label"
+            .col-sm-4
+              = f.text_field :total_labor, class: "form-control", :disabled=>true
+            .col-sm-10
+        .col-md-8
+          .form-group.row
+            = f.label :description, 'Description', class: "col-sm-2 col-form-label"
+            .col-sm-10
+              = f.text_field :description, class: "form-control"
+          .form-group.row
+            = f.label :eqp_object_id, 'Equipment', class: "col-sm-2 col-form-label"
+            .col-sm-10
+              = f.select(:eqp_object_id, ( EqpObject.all.map {|t| [t.expanded_desc, t.id ]}), { include_blank: true }, {class: "form-control"})
+              - if @event.persisted?
+                = link_to @event.eqp_object.code, edit_eqp_object_path(@event.eqp_object)
+          .form-group.row
+            = f.label :eqp_object_description, "Equipment Description", class: 'col-sm-2 col-form-label'
+            .col-sm-10
+              - if @event.user_id?
+                %input.form-control{:disabled => "disabled", :name => "event[user_id]", :type => "text", :value => "#{@event.eqp_object.description}"}
+              - else
+                %input.form-control{:disabled => "disabled", :name => "event[user_id]", :type => "text", :value => ""}
+
+          .row
+            .col-md-6
+              .form-group.row
+                = f.label :sched_start_date, 'Sched. Start Date', class: "col-sm-6 col-form-label"
+                .col-sm-6
+                  = f.text_field :sched_start_date, :data => {:provide => "datepicker"}, class: "form-control datepicker"
+              .form-group.row
+                = f.label :due_date, 'PM Due Date', class: "col-sm-6 col-form-label"
+                .col-sm-6
+                  = f.text_field :due_date, :data => {:provide => "datepicker"}, class: "form-control datepicker", :disabled=>true
+              .form-group.row
+                = f.label :created_at, 'Date Created', class: "col-sm-6 col-form-label"
+                .col-sm-6
+                  = f.text_field :created_at, class: "form-control", :disabled => true
+            .col-md-6
+              .form-group.row
+                = f.label "Owner", class: 'col-sm-4 col-form-label'
+                .col-sm-8
+                  = f.text_field :event_owner, class: "form-control"
+              .form-group.row
+                = f.label "Assigned To", class: 'col-sm-4 col-form-label'
+                .col-sm-8
+                  = f.text_field :assigned_to, class: "form-control", :disabled=>true
+              .form-group.row
+                = f.label :pm_schedule_id, 'PM Schedule', class: 'col-sm-4 col-form-label'
+                .col-sm-8
+                  - if @event.persisted?
+                    %input.form-control{:disabled => "disabled", :name => "event[user_id]", :type => "text", :value => "#{@event.pm_schedule.code if @event.pm_schedule_id}"}
+                  - else
+                    %input.form-control{:disabled => "disabled", :name => "event[user_id]", :type => "text", :value => ""}
+          .row
+            .col-md-6
+              .form-group.row
+                = f.label :user_id, 'Created By', class: 'col-sm-6 col-form-label'
+                .col-sm-6
+                  - if @event.user_id?
+                    %input.form-control{:disabled => "disabled", :name => "event[user_id]", :type => "text", :value => "#{@event.user.name}"}
+                  - else
+                    %input.form-control{:disabled => "disabled", :name => "event[user_id]", :type => "text", :value => ""}
+  .row
+    .col-md-4
+      .card
+        .card-header
+          %strong Closing
+        .card-body
+          .form-group.row
+            = f.label 'Equipment Group', class: "col-sm-4 col-form-label"
+            .col-sm-8
+              = f.select(:event_eqp_group_id, ( EventEqpGroup.all.map {|t| [ t.expanded_desc, t.id ]}), { include_blank: true }, {class: "form-control"})
+          .form-group.row
+            = f.label 'Problem Code', class: "col-sm-4 col-form-label"
+            .col-sm-8
+              = f.select(:event_problem_id, ( EventProblem.all.map {|t| [ t.expanded_desc, t.id ]}), { include_blank: true }, {class: "form-control"})
+          .form-group.row
+            = f.label 'Component Group', class: "col-sm-4 col-form-label"
+            .col-sm-8
+              = f.select(:event_component_id, ( EventComponent.all.map {|t| [ t.expanded_desc, t.id ]}), { include_blank: true },{class: "form-control"})
+          .form-group.row
+            = f.label 'Failure Mode', class: "col-sm-4 col-form-label"
+            .col-sm-8
+              = f.select(:event_failure_id, ( EventFailure.all.map {|t| [ t.expanded_desc, t.id ]}), { include_blank: true }, {class: "form-control"})
+          .form-group.row
+            = f.label :downtime_hours, 'Downtime Hrs', class: "col-sm-4 col-form-label"
+            .col-sm-3
+              = f.text_field :downtime_hours, class: "form-control"
+            .col-sm-10
+.card
+  .card-header
+    %strong Booked Labor
+  .card-body
+    .table-responsive
+      %table.table.table-striped.table-hover
+        %thead
+          %tr
+            %th Employee
+            %th Hours
+            %th Date Worked
+            %th Comments
+            %th Created at
+          %tbody
+            - if @event.id?
+              - if @event.labor_hours.any?
+                = render partial: 'labor_hours/labor_hours', locals: {laborable: @event}
+              - else
+                %tr
+                  %td No labor booked
+                  %td
+                  %td
+                  %td
+                  %td
+    - if @event.id?
+      = render partial: 'labor_hours/form', locals: {laborable: @event}
+.card
+  .card-header
+    %strong Comments
+  .card-body
+    - if @event.id?
+      - if @event.comments.any?
+        = render partial: "comments/comments", locals: {commentable: @event}
+      - else
+        No comments
+        %hr
+      = render partial: "comments/form", locals: {commentable: @event}

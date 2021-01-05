@@ -1,0 +1,25 @@
+.page-header
+  %h1 Failure Mode Setup
+  %p
+  = link_to new_event_failure_path, class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    New Failure Mode
+  %h1evt_criticalities
+
+.table-responsive
+  %table.table.table-striped.table-hover@myTable
+    %thead
+      %tr
+        %th{"data-card-title" => ""} Failure Mode
+        %th Description
+        %th{:style => "text-align:center"} Out of Service
+    %tbody
+      - @event_failures.each do |event_failure|
+        %tr
+          %td= link_to event_failure.code, edit_event_failure_path(event_failure)
+          %td= event_failure.description
+          %td{:style => "text-align:center"}
+            - if event_failure.not_used
+              %i.far.fa-check-square
+            - else
+              %i.far.fa-square

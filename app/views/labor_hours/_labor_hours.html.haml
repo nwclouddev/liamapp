@@ -1,0 +1,7 @@
+- laborable.labor_hours.order(created_at: :asc).each do |labor_hour|
+  %tr
+    %td= labor_hour.user.name
+    %td= labor_hour.hours
+    %td= labor_hour.date_worked
+    %td= labor_hour.description
+    %td= labor_hour.created_at

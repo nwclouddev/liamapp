@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Code:
+  = @part_class.code
+%p
+  %b Not used:
+  = @part_class.not_used
+
+= link_to 'Edit', edit_part_class_path(@part_class)
+\|
+= link_to 'Back', part_classes_path

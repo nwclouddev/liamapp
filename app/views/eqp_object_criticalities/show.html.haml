@@ -1,0 +1,16 @@
+.page-header
+  = link_to eqp_object_criticalities_path, class: 'btn btn-default' do
+    %span.glyphicon.glyphicon-list-alt
+    Back
+  = link_to edit_eqp_object_criticality_path(@eqp_object_criticality), class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-pencil
+    Edit
+  %h1 Show eqp_object_criticality
+
+%dl.dl-horizontal
+  %dt Seq:
+  %dd= @eqp_object_criticality.seq
+  %dt Desc:
+  %dd= @eqp_object_criticality.desc
+  %dt Not used:
+  %dd= @eqp_object_criticality.not_used

@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+    <title>LIAM</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <%= stylesheet_pack_tag 'application', media: 'all' %>
+    <%= javascript_pack_tag 'application' %>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+  </head>
+  <body id="page-top">
+    <div id="wrapper">
+      <% if signed_in? %>
+        <%= render 'layouts/navigations/sidebar' %>
+      <% end %>
+      <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+          <%= render 'layouts/navigations/topbar' %>
+          <div class="container-fluid">
+            <%= render 'shared/messages' %>
+            <%= yield %>
+          </div>
+        </div>
+        <%= render 'layouts/footer' %>
+      </div>
+    </div>
+    <%= render 'layouts/sb_extras' %>
+  </body>
+</html>

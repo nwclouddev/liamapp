@@ -1,0 +1,46 @@
+%h1 Ahoy Event Log
+.table-responsive
+  %table.table.table-striped.table-condensed.table-hover
+    %thead
+      %tr
+        %th Event ID
+        %th Time
+        %th User
+        %th Visit ID
+        %th IP Address
+        %th City
+        %th State/Region
+        %th Country
+        %th Lat./Lon.
+        %th Browser
+        %th OS
+        %th Device Type
+        %th Landing Page
+        %th User
+        %th Actions
+        %th Referrer
+        %th User Agent
+        %th Actions
+    %tbody
+      - @ahoy_events.each do |ahoy_event|
+        %tr
+          %td= ahoy_event.id
+          %td= ahoy_event.time.in_time_zone("Pacific Time (US & Canada)")
+          %td= ahoy_event.user_id
+          %td= ahoy_event.visit.id
+          %td= ahoy_event.visit.ip
+          %td= ahoy_event.visit.city
+          %td= ahoy_event.visit.region
+          %td= ahoy_event.visit.country
+          %td= "#{ahoy_event.visit.latitude} / #{ahoy_event.visit.longitude}"
+          %td= ahoy_event.visit.browser
+          %td= ahoy_event.visit.os
+          %td= ahoy_event.visit.device_type
+          %td= ahoy_event.visit.landing_page
+          %td= ahoy_event.user.name if ahoy_event.user
+          %td= ahoy_event.properties
+          %td= ahoy_event.visit.referrer
+          %td= ahoy_event.visit.user_agent
+          %td= link_to "Delete", ahoy_event_path(ahoy_event), method: :delete,
+              data: { confirm: "Are you sure you want to delete this record?" },
+              class: "btn btn-xs btn-danger"

@@ -1,0 +1,19 @@
+-# frozen_string_literal: true
+= simple_form_for(@purchase_order) do |f|
+  = f.error_notification
+  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+  .form-inputs
+    = f.input :description
+    - if @purchase_order.id.present?
+      = f.association :organization, collection: Organization.all.order(:code), prompt: "Select and Organization", label_method: :code, disabled: true
+    - else
+      = f.association :organization, collection: Organization.all.order(:code), label_method: :code
+    = f.input :due_date
+    = f.association :user
+    = f.input :purchase_order_status_id
+    = f.input :supplier_id
+    = f.association :store, label_method: :code
+
+  .form-actions
+    = f.button :submit

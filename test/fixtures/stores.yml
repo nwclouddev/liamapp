@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  code: MyString
+  description: MyString
+  organization: one
+  not_used: false
+
+two:
+  code: MyString
+  description: MyString
+  organization: two
+  not_used: false

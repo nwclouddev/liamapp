@@ -1,0 +1,70 @@
+<%= simple_form_for(@store) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  <% unless @store.id.present? %>
+    <div class="form-actions">
+      <%= f.button :submit, class: 'btn btn-sm btn-primary' %>
+    </div>
+  <% end %>
+  <div class="form-inputs">
+    <% if @store.id.present? %>
+      <%= f.input :code, readonly: true %>
+      <%= f.input :description, readonly: true %>
+      <%= f.association :organization, collection: Organization.all.order(:code), prompt: "Select and Organization", label_method: :code, disabled: true %>
+    <% else %>
+      <%= f.input :code %>
+      <%= f.input :description %>
+      <%= f.association :organization, collection: Organization.all.order(:code), prompt: "Select and Organization", label_method: :code %>
+    <% end %>
+    <%= f.input :not_used %>
+  </div>
+<% end %>
+<hr/>
+<h5>Stock</h5>
+<%= link_to "New Stock Record", new_store_part_path, class: 'btn btn-sm btn-primary' %>
+<div class="table-responsive">
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <td>Part</td>
+        <td>Description</td>
+        <td>Default Bin</td>
+        <td>Quantity</td>
+        <td>Minimum Qty</td>
+        <td>Maximum Qty</td>
+        <td>Stock Criticality</td>
+        <td>Preferred Supplier</td>
+        <td></td>
+      </tr>
+    </thead>
+    <tbody>
+      <% if @store.id? && @store_parts.any? %>
+        <span class="badge"></span>
+        <% @store_parts.each do |store_part| %>
+          <tr>
+            <td><%= link_to store_part.part.id, edit_store_part_path(store_part) %></td>
+            <td><%= store_part.part.description %></td>
+            <td><%= store_part.bin.code %></td>
+            <td><%= store_part.quantity%></td> 
+            <td><%= store_part.min_qty %></td>
+            <td><%= store_part.max_qty %></td>
+            <td><%= store_part.stock_criticality.code %></td>
+            <td><%= store_part.supplier.code %></td>
+            <td style="text-align:center">
+              <%= link_to store_part, method: :delete, data: { confirm: 'Are you sure?' } do %>
+                <i class="text-danger fa fa-trash-alt"></i>
+              <% end %>
+            </td>
+
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+  <div class='pagination justify-content-center'>
+    <%= paginate @store_parts, theme: 'twitter-bootstrap-4', align: 'center' %>
+  </div>
+</div>
+
+
+  

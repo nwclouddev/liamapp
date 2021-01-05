@@ -1,0 +1,32 @@
+%h1 Users
+.table-responsive
+  %table.table.table-hover.table-striped
+    %thead
+      %tr
+        %th{:scope => "col"} User ID
+        %th{:scope => "col"} Name
+        %th{:scope => "col"} Email
+        %th{:scope => "col", :style => "text-align:center"} Out of Service
+        %th{:style => "text-align:center"} Permission Group
+        %th{:style => "text-align:center"} Home Org.
+        %th{:style => "text-align:center"} Default Store
+        %th{:scope => "col"} Created At
+        %th{:style => "text-align:center"} Actions
+    %tbody
+      - @users.each do |user|
+        %tr
+          %td= link_to user.name, edit_user_path(user)
+          %td= user.description
+          %td= user.email
+          %td{:style => "text-align:center"}
+            - if user.not_used
+              %i.far.fa-check-square
+            - else
+              %i.far.fa-square
+          %td{:style => "text-align:center"}= user.permission_group_id
+          %td{:style => "text-align:center"}= user.organization.code
+          %td{:style => "text-align:center"}= user.store.code
+          %td= user.created_at
+          %td{:style => "text-align:center"}
+            = link_to user, method: :delete, data: { confirm: 'Are you sure?' } do
+              %i.text-danger.fa.fa-trash-alt

@@ -1,0 +1,16 @@
+.page-header
+  = link_to entity_categories_path, class: 'btn btn-danger' do
+    %span.glyphicon.glyphicon-list-alt
+    Back
+  = link_to edit_entity_category_path(@entity_category), class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-pencil
+    Edit
+  %h1 Show entity_category
+
+%dl.dl-horizontal
+  %dt Code:
+  %dd= @entity_category.code
+  %dt Desc:
+  %dd= @entity_category.desc
+  %dt Entity class:
+  %dd= @entity_category.entity_class

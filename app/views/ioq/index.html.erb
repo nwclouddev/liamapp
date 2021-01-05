@@ -1,0 +1,48 @@
+<h1>IOQ</h1>
+
+<div class="d-flex justify-content-center">
+
+  <div class="col-xl-4 col-lg-5">
+    <div class="card shadow mb-4">
+    <!-- Card Header - Dropdown -->
+    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+      <h6 class="m-0 font-weight-bold text-primary">IOQ Progress</h6>
+    </div>
+    <!-- Card Body -->
+    <div class="card-body">
+      <%= pie_chart @ioq_objects.where(organization_id: current_user.organization_id).joins(:eqp_object_status).group("eqp_object_statuses.description").count, donut: true %>
+    </div>
+  </div>
+  <div class="col-auto">
+      <label class="sr-only" for="inlineFormInputGroup">Scan Equipment to IOQ</label>
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <span class="fas fa-qrcode"></span>
+          </div>
+        </div>
+        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Scan Equipment to IOQ">
+      </div>
+    </div>
+  <%= link_to new_eqp_object_path, class: 'btn btn-primary' do %>
+    <span class="fas fa-plus"></span>
+    Add Asset
+  <% end %>
+  <h5>Assets</h5>
+  <% if @ioq_objects.any? %>
+    <div class="card">
+      <ul class="list-group list-group-flush">
+        <% @ioq_objects.each do |o| %>
+          <li class="list-group-item">
+            <%= link_to o.code, edit_eqp_object_path(o) %>
+            <br>
+            <%= o.description %>
+            <br>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% else %>
+    <h6>No pending assets at this time!</h6>
+  <% end %>
+</div>

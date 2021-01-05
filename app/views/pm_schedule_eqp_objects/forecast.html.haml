@@ -1,0 +1,58 @@
+:javascript
+  document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      schedulerLicenseKey: '0693168212-fcs-1561265510',
+      plugins: [ 'interaction','resourceTimeline' ],
+      header: {
+        left: 'today',
+        center: 'title',
+        right: 'prev,next'
+      },
+      editable: true,
+      defaultView: 'resourceTimelineMonth',
+      aspectRatio: 1.5,
+      resourceColumns: [
+        {
+          labelText: 'Equipment',
+          field: 'eqp_object'
+        },
+        {
+          labelText: 'PM Schedule',
+          field: 'pm_schedule'
+        },
+        {
+          labelText: 'Est. Hrs.',
+          field: 'est_hrs'
+        }
+      ],
+      resources: '/pm_events.json?single-day&for-resource-timeline',
+      events: '/pm_events.json?single-day&for-resource-timeline',
+      eventDrop: function(event, delta, revertFunc) {
+        event_data = { 
+          event: {
+            id: event.id,
+            due_date: event.start
+          }
+        };
+        $.ajax({
+            url: "/pm_schedule_eqp_objects/" + event.update_url,
+            data: event_data,
+            type: 'PATCH'
+        });
+      },
+      
+      eventClick: function(event, jsEvent, view) {
+        $.getScript(event.edit_url, function() {});
+      }
+    });
+
+    calendar.render();
+  });
+#modal-window.modal.fade{ "aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+%h1 Forecast Tool
+= link_to "Equipment on PMs", pm_schedule_eqp_objects_path, class: 'btn btn-primary'
+#calendar

@@ -1,0 +1,43 @@
+.page-header
+  %p
+  = link_to new_pm_schedule_path, class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    New
+  %h1 PM Schedules
+.table-responsive
+  %table.table.table-striped.table-hover
+    %thead
+      %tr
+        %th{"data-card-title" => ""} PM Schedule
+        %th Profile
+        %th Desctiption
+        %th Frequency
+        %th Period UOM
+        %th{:style => "text-align:center"} Out of Service
+        %th Trade
+        %th Estimated Hours
+        %th Persons Required
+    %tbody
+      - @pm_schedules.each do |pm_schedule|
+        %tr
+          %td= link_to pm_schedule.code, edit_pm_schedule_path(pm_schedule)
+          - if pm_schedule.eqp_profile == nil
+            %td
+          - else
+            %td= pm_schedule.eqp_profile.code
+          %td= pm_schedule.description
+          %td= pm_schedule.frequency
+          %td= pm_schedule.period_uom.description
+          %td{:style => "text-align:center"}
+            - if pm_schedule.not_used
+              %i.far.fa-check-square
+            - else
+              %i.far.fa-square
+          %td= pm_schedule.trade
+          %td= pm_schedule.est_hours
+          %td= pm_schedule.persons_required
+.container.pagination.justify-content-center
+  = paginate @pm_schedules, theme: 'twitter-bootstrap-4', align: 'center'
+= form_tag import_pm_schedules_path, multipart: true do
+  = file_field_tag :file
+  = submit_tag "Upload"

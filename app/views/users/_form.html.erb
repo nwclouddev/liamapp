@@ -1,0 +1,18 @@
+<%= simple_form_for(@user) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  <div class="form-inputs">
+    <% if @user.id.present? %>
+      <%= f.input :name, disabled: true %>
+    <% else %>
+      <%= f.input :name %>
+    <% end %>
+    <%= f.input :description %>
+    <%= f.association :organization, label: 'Home Organization', collection: Organization.all.order(:code), prompt: "Select an Organization", label_method: :code %>
+    <%= f.association :store, label: 'Default Store', collection: Store.all.order(:code), prompt: "Select an Store", label_method: :code %>
+    <%= f.input :not_used %>
+  </div>
+  <div class="form-actions">
+    <%= f.button :submit, class: 'btn btn-sm btn-primary' %>
+  </div>
+<% end %>

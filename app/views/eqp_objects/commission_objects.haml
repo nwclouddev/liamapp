@@ -1,0 +1,50 @@
+.page-header
+  %p
+  = link_to new_eqp_object_path, class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    Add Equipment
+  %h1 Equipment Pending Commission
+
+.table-responsive
+  %table.table.table-striped.table-hover
+    %thead
+      %tr
+        %th Equipment
+        %th Description
+        %th Alias
+        %th Commission date
+        %th Manufacturer
+        %th Model
+        %th Revision
+        %th Profile to Apply
+        %th Profile Applied
+        %th Out of Service
+        %th Class
+        %th Category
+        %th Status
+        %th Criticality
+        %th Organization
+    %tbody
+      - @eqp_objects.each do |eqp_object|
+        %tr
+          %td= link_to eqp_object.code, edit_eqp_object_path(eqp_object)
+          %td= eqp_object.desc
+          %td= eqp_object.alias
+          %td= eqp_object.commission_date
+          %td= eqp_object.manufact
+          %td= eqp_object.manufact_model
+          %td= eqp_object.revision
+          %td= eqp_object.profile_to_apply
+          %td= eqp_object.profile_applied
+          %td
+            - if eqp_object.not_used
+              %i.far.fa-check-square
+            - else
+              %i.far.fa-square
+          %td= eqp_object.entity_class.code
+          %td= eqp_object.entity_category.code
+          %td= eqp_object.eqp_object_status.desc
+          %td= eqp_object.eqp_object_criticality.desc
+          %td= eqp_object.organization.code
+.container.pagination.justify-content-center
+  = paginate @eqp_objects, theme: 'twitter-bootstrap-4', align: 'center'

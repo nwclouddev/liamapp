@@ -1,0 +1,35 @@
+<h1>Job Queue</h1>
+Job Count: <%= @delayed_jobs.count %>
+<br/>
+<div class="table-responsive">
+  <table class="table table-striped table-condensed table-hover">
+    <thead>
+      <tr>
+        <th>Job ID</th>
+        <th>Job Name</th>
+        <th>Date Created</th>
+        <th>Run At</th>
+        <th>Priority</th>
+        <th>Attempts</th>
+        <th>Last Error</th>
+        <th>Locked At</th>
+        <th>Locked By</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @delayed_jobs.each do |delayed_job| %>
+        <tr>
+          <td><%= delayed_job.id %></td>
+          <td><%= delayed_job.queue %></td>
+          <td><%= delayed_job.created_at.strftime("%F %T") %></td>
+          <td><%= delayed_job.run_at.strftime("%F %T") %></td>
+          <td><%= delayed_job.priority %></td>
+          <td><%= delayed_job.attempts %></td>
+          <td><%= delayed_job.last_error %></td>
+          <td><%= delayed_job.locked_at %></td>
+          <td><%= delayed_job.locked_by %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

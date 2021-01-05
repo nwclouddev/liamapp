@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  event: one
+  user: one
+  hours: 1.5
+  date_worked: 2019-12-14
+  description: MyString
+
+two:
+  event: two
+  user: two
+  hours: 1.5
+  date_worked: 2019-12-14
+  description: MyString

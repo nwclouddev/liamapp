@@ -1,0 +1,66 @@
+%p#notice= notice
+
+%p
+  %b Organization:
+  = @event.organization.code
+%p
+  %b Eqp object:
+  = @event.eqp_object.code
+%p
+  %b Desc:
+  = @event.description
+%p
+  %b Evt type:
+  = @event.event_type.description
+%p
+  %b Evt status:
+  = @event.event_status.description
+%p
+  %b Evt priority:
+  = @event.event_priority.description
+%p
+  %b User:
+  = @event.user.name
+%p
+  %b Sched start date:
+  = @event.sched_start_date
+%p
+  %b Sched end date:
+  = @event.sched_end_date
+%p
+  %b Labor hours:
+  = @event.labor_hours
+%p
+  %b Estimated hours:
+  = @event.estimated_hours
+%p
+  %b Pm code:
+  -# = @event.pm_code if @event.pm_code?
+%p
+  %b Due date:
+  = @event.due_date
+%p
+  %b Date completed:
+  = @event.date_completed
+%p
+  %b Reopened:
+  = @event.reopened
+%p
+  %b Completed by:
+  -# = @event.completed_by
+%p
+  %b Evt eqp code:
+  -# = @event.evt_eqp_code
+%p
+  %b Evt problem code:
+  -# = @event.evt_problem_code
+%p
+  %b Evt failure code:
+  -# = @event.evt_failure_code
+%p
+  %b Evt component code:
+  -# = @event.evt_component_code
+
+= link_to 'Edit', edit_event_path(@event)
+\|
+= link_to 'Back', events_path

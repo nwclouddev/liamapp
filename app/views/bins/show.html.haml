@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Code:
+  = @bin.code
+%p
+  %b Description:
+  = @bin.description
+%p
+  %b Organization:
+  = @bin.organization
+
+= link_to 'Edit', edit_bin_path(@bin)
+\|
+= link_to 'Back', bins_path

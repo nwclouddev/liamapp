@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  code: MyString
+  description: MyString
+  part_class: one
+  part_uom: one
+  not_used: false
+
+two:
+  code: MyString
+  description: MyString
+  part_class: two
+  part_uom: two
+  not_used: false

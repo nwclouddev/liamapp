@@ -1,0 +1,2 @@
+class EventPriority < ApplicationRecord
+end

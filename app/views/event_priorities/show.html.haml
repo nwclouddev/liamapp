@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Seq:
+  = @evt_priority.seq
+%p
+  %b Description:
+  = @evt_priority.description
+%p
+  %b Not used:
+  = @evt_priority.not_used
+
+= link_to 'Edit', edit_evt_priority_path(@evt_priority)
+\|
+= link_to 'Back', evt_priorities_path

@@ -1,0 +1,45 @@
+.page-header
+  %p
+    %h1 Equipment Profiles
+  = link_to new_eqp_profile_path, class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    New
+.table-responsive
+  %table.table.table-striped.table-hover
+    %thead
+      %tr
+        %th Profile
+        %th Description
+        %th Manufacturer
+        %th Model
+        %th{:style => "text-align:center"} Out of Service
+        %th Class
+        %th Category
+        %th Status
+        %th Criticality
+        %th Object Type
+    %tbody
+      - @eqp_profiles.each do |eqp_profile|
+        %tr
+          %td= link_to eqp_profile.code, edit_eqp_profile_path(eqp_profile)
+          %td= eqp_profile.description
+          - if eqp_profile.manufacturer_id?
+            %td= eqp_profile.manufacturer.code
+          - else
+            %td
+          %td= eqp_profile.manufact_model
+          %td{:style => "text-align:center"}
+            - if eqp_profile.not_used
+              %i.far.fa-check-square
+            - else
+              %i.far.fa-square
+          %td= eqp_profile.eqp_object_class.code
+          %td= eqp_profile.eqp_object_category.code
+          %td= eqp_profile.eqp_object_status.description
+          %td= eqp_profile.eqp_object_criticality.description
+          %td= eqp_profile.obj_type
+.container.pagination.justify-content-center
+  = paginate @eqp_profiles, theme: 'twitter-bootstrap-4', align: 'center'
+= form_tag import_eqp_profiles_path, multipart: true do
+  = file_field_tag :file
+  = submit_tag "Upload"

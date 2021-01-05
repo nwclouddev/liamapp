@@ -1,0 +1,10 @@
+- commentable.comments.order(created_at: :asc).each do |comment|
+  .card
+    .card-body
+      .comment-body
+        = comment.body
+      .comment-time
+        %small
+          Created: #{comment.created_at}
+          %br
+          By: #{comment.user.name}

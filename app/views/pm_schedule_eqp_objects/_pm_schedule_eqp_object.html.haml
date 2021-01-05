@@ -1,0 +1,7 @@
+%tr{:id => "#{pm_schedule_eqp_object.id}"}
+  %td= link_to pm_schedule_eqp_object.pm_schedule.code, edit_pm_schedule_path(pm_schedule_eqp_object.pm_schedule_id)
+  %td= link_to pm_schedule_eqp_object.eqp_object.code, edit_eqp_object_path(pm_schedule_eqp_object.eqp_object_id)
+  %td= pm_schedule_eqp_object.eqp_object.organization.code
+  %td #{pm_schedule_eqp_object.pm_schedule.frequency}#{pm_schedule_eqp_object.pm_schedule.period_uom.code}
+  %td= link_to pm_schedule_eqp_object.due_date, edit_pm_schedule_eqp_object_path(pm_schedule_eqp_object),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}
+  %td= pm_schedule_eqp_object.est_hours

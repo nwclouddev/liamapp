@@ -1,0 +1,2 @@
+      invoke  active_record
+      remove    db/migrate/20200315190208_add_status_code_to_eqp_objects.rb

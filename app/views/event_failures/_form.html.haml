@@ -1,0 +1,17 @@
+= render 'shared/errors', obj: @event_failure
+= form_for @event_failure, html: { class: "form-horizontal", role: "form" } do |f|
+  .form-group
+    = f.label :code, class: 'col-sm-2 col-form-label'
+    - if @event_failure.persisted?
+      = f.text_field :code, class: 'form-control', readonly: true
+    - else
+      = f.text_field :code, class: 'form-control'
+  .form-group
+    = f.label :description, class: 'col-sm-2 col-form-label'
+    = f.text_field :description, class: 'form-control'
+  .form-group
+    = f.label :not_used, class: 'col-sm-2 col-form-label'
+  .form-group.form-check
+    = f.check_box :not_used, class: 'form-check-input'
+    = f.label :not_used, "Out of Service", class: 'form-check-label'
+  = render 'shared/form_navigation'

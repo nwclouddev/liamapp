@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  seq: 1
+  description: MyString
+  active_on_create: false
+  not_used: false
+
+two:
+  seq: 1
+  description: MyString
+  active_on_create: false
+  not_used: false

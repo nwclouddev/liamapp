@@ -1,0 +1,25 @@
+%h1 Equipment Classes
+= link_to 'New',new_eqp_object_class_path, class: 'btn btn-primary'
+.table-responsive
+  %table.table.table-hover
+    %thead
+      %tr
+        %th{:scope => "col"} Class
+        %th{:scope => "col"} Description
+        %th{:scope => "col", :style => "text-align:center"} Out of Service
+    %tbody
+      - @eqp_object_classes.each do |eqp_object_class|
+        %tr
+          %td= link_to eqp_object_class.code, edit_eqp_object_class_path(eqp_object_class)
+          %td= eqp_object_class.description
+          %td{:style => "text-align:center"}
+            - if eqp_object_class.not_used
+              %i.far.fa-check-square
+            - else
+              %i.far.fa-square
+.container.pagination.justify-content-center
+  = paginate @eqp_object_classes, theme: 'twitter-bootstrap-4', align: 'center'
+= form_tag import_eqp_object_classes_path, multipart: true do
+  = file_field_tag :file
+  = submit_tag "Upload"
+

@@ -1,0 +1,22 @@
+.page-header
+  %h1 Functional Area Setup
+  = link_to new_functional_area_path, class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    New
+.table-responsive
+  %table.table.table-striped.table-hover
+    %thead
+      %tr
+        %th Functional Area
+        %th Description
+        %th{:style => "text-align:center"} Out of Service
+    %tbody
+      - @functional_areas.each do |functional_area|
+        %tr
+          %td= link_to functional_area.code, edit_functional_area_path(functional_area)
+          %td= functional_area.description
+          %td{:style => "text-align:center"}
+            - if functional_area.not_used
+              %i.far.fa-check-square
+            - else
+              %i.far.fa-square

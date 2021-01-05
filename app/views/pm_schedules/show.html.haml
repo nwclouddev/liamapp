@@ -1,0 +1,18 @@
+.page-header
+  = link_to pm_schedules_path, class: 'btn btn-default' do
+    %span.glyphicon.glyphicon-list-alt
+    Back
+  = link_to edit_pm_schedule_path(@pm_schedule), class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-pencil
+    Edit
+  %h1 Show pm_schedule
+
+%dl.dl-horizontal
+  %dt Code:
+  %dd= @pm_schedule.code
+  %dt Desc:
+  %dd= @pm_schedule.description
+  %dt Frequency:
+  %dd= @pm_schedule.frequency
+  %dt Period uom:
+  %dd= @pm_schedule.period_uom

@@ -1,0 +1,100 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/">LIAM</a>
+  <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <% if signed_in? %>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <% if signed_in? && current_user.permission_group_id == 99 %>
+          <li class="nav-item">
+            <%= link_to "Work Orders", events_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Equipment", eqp_objects_path, class:'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "PM Schedules", pm_schedules_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Forecast Tool", forecast_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Parts", parts_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item dropdown">
+            <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="navbarDropdown" role="button">
+              Administration
+            </a>
+            <div aria-labelledby="navbarDropdown" class="dropdown-menu">
+              <%= link_to "Announcements", articles_path, class:'dropdown-item' %>
+              <%= link_to "Announcement Categories", categories_path, class:'dropdown-item' %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Equipment Categories", eqp_object_categories_path, class:'dropdown-item' %>
+              <%= link_to "Equipment Classes", eqp_object_classes_path, class:'dropdown-item' %>
+              <%= link_to "Equipment Criticality", eqp_object_criticalities_path, class:'dropdown-item' %>
+              <%= link_to "Equipment Status", eqp_object_statuses_path, class:'dropdown-item' %>
+              <%= link_to "Equipment Objects", eqp_objects_path, class:'dropdown-item' %>
+              <%= link_to "Equipment Profiles", eqp_profiles_path, class:'dropdown-item' %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "WO Component Codes", event_components_path, class:'dropdown-item' %>
+              <%= link_to "WO Equipment Groups", event_eqp_groups_path, class:'dropdown-item' %>
+              <%= link_to "WO Failure Modes", event_failures_path, class:'dropdown-item' %>
+              <%= link_to "WO Priority", event_priorities_path, class:'dropdown-item' %>
+              <%= link_to "WO Problem Codes", event_problems_path, class:'dropdown-item' %>
+              <%= link_to "WO Status", event_statuses_path, class:'dropdown-item' %>
+              <%= link_to "WO Types", event_types_path, class:'dropdown-item' %>
+              <%= link_to "Work Orders", events_path, class:'dropdown-item' %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Functional Areas", functional_areas_path, class:'dropdown-item' %>
+              <%= link_to "Lane Types", lane_types_path, class:'dropdown-item' %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Manufacturers", manufacturers_path, class:'dropdown-item' %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Organizations", organizations_path, class:'dropdown-item' %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "PM Schedules", pm_schedules_path, class:'dropdown-item' %>
+              <%= link_to "PM Schedule Equipment Objects", pm_schedule_eqp_objects_path, class:'dropdown-item' %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Users", users_path, class:'dropdown-item' %>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+      <ul class="navbar-nav navbar-right">
+        <li class="nav-item dropdown">
+          <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="navbarDropdown" role="button">
+            <small>
+              User:
+              <%= current_user.name %>
+              | Organization:
+              <%= current_user.organization.code %>
+              <i class="far fa-user"></i>
+            </small>
+          </a>
+          <div aria-labelledby="navbarDropdown" class="dropdown-menu dropdown-menu-right">
+            <%= link_to "My Account", edit_user_registration_path, class: "dropdown-item" %>
+            <div class="dropdown-divider"></div>
+            <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+          </div>
+        </li>
+      </ul>
+    </div>
+  <% else %>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <%= link_to "About", about_path, class: 'nav-link' %>
+        </li>
+      </ul>
+      <ul class="navbar-nav navbar-right">
+        <li class="nav-item">
+          <%= link_to "Sign Up", new_user_registration_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Log In", new_user_session_path, class: 'nav-link' %>
+        </li>
+      </ul>
+    </div>
+  <% end %>
+</nav>
